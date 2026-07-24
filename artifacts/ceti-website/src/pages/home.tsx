@@ -90,53 +90,68 @@ export default function Home() {
       </section>
 
       {/* ══ 02 · STATEMENT ══════════════════════════════════════ */}
-      <section className="w-full bg-ceti-navy overflow-hidden">
+      <section className="w-full bg-[#0D1117] border-t border-white/8">
 
-        {/* Big stat + label inline */}
-        <motion.div
-          initial={{ opacity: 0, y: 40 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, margin: "-10%" }}
-          transition={{ duration: 1, ease: [0.16, 1, 0.3, 1] }}
-          className="px-8 md:px-14 pt-20 pb-10 border-b border-white/8"
-        >
-          <div className="flex items-end gap-5 md:gap-8">
-            <span className="font-serif text-[clamp(5rem,15vw,180px)] leading-[0.85] text-ceti-orange select-none">
-              600M
-            </span>
-            <div className="pb-1 md:pb-4 flex flex-col gap-1">
-              <span className="font-sans text-sm md:text-base tracking-[0.22em] uppercase text-white/35">
-                Africans without<br />reliable electricity — today
-              </span>
-            </div>
-          </div>
-        </motion.div>
+        {/* Editorial two-column */}
+        <div className="px-8 md:px-14 py-20 md:py-28 grid md:grid-cols-[1fr_2fr] gap-12 md:gap-24 items-start">
 
-        {/* Statement + stat pills */}
-        <div className="px-8 md:px-14 py-14 md:py-20 grid md:grid-cols-2 gap-12 md:gap-20 items-center">
-          <motion.p
-            initial={{ opacity: 0, y: 32 }}
+          {/* Left — anchor stat */}
+          <motion.div
+            initial={{ opacity: 0, y: 28 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true, margin: "-8%" }}
             transition={{ duration: 1, ease: [0.16, 1, 0.3, 1] }}
-            className="font-serif text-[clamp(1.6rem,2.6vw,3.2rem)] text-white leading-[1.15] tracking-tight"
+            className="flex flex-col gap-3 md:sticky md:top-32"
           >
-            Africa holds the world's greatest solar potential and the fastest-growing
-            energy markets on earth. The missing link is knowledge.
-          </motion.p>
-
-          {/* 3 pills in a row on desktop */}
-          <motion.div
-            initial={{ opacity: 0, y: 32 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true, margin: "-8%" }}
-            transition={{ duration: 1, ease: [0.16, 1, 0.3, 1], delay: 0.15 }}
-            className="grid grid-cols-3 gap-6 md:gap-4"
-          >
-            <StatPill value="60%"  label="of global solar irradiance"    color="#2AA89C" />
-            <StatPill value="3×"   label="Africa's power demand by 2040"  color="#E8551A" />
-            <StatPill value="54"   label="Countries. One energy story."   color="#F6A820" />
+            <span className="font-sans text-[10px] tracking-[0.35em] uppercase text-white/25">The Context</span>
+            <span className="font-serif text-[clamp(4rem,10vw,110px)] leading-[0.88] text-ceti-orange select-none tabular-nums">
+              600M
+            </span>
+            <span className="font-sans text-sm tracking-[0.14em] text-white/40 leading-relaxed max-w-[18ch]">
+              Africans without reliable electricity — today
+            </span>
           </motion.div>
+
+          {/* Right — manifesto + data annotations */}
+          <div className="flex flex-col gap-14">
+            <motion.p
+              initial={{ opacity: 0, y: 32 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, margin: "-8%" }}
+              transition={{ duration: 1, ease: [0.16, 1, 0.3, 1], delay: 0.1 }}
+              className="font-serif text-[clamp(1.8rem,3vw,3.6rem)] text-white leading-[1.12] tracking-tight"
+            >
+              Africa holds the world's greatest solar potential and the fastest-growing energy markets on earth. The missing link is knowledge.
+            </motion.p>
+
+            {/* Horizontal annotation strip */}
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, margin: "-8%" }}
+              transition={{ duration: 0.9, ease: [0.16, 1, 0.3, 1], delay: 0.25 }}
+              className="grid grid-cols-3 border-t border-white/10"
+            >
+              {[
+                { value: "60%", label: "of global solar irradiance",    color: "#2AA89C" },
+                { value: "3×",  label: "Africa's power demand by 2040", color: "#E8551A" },
+                { value: "54",  label: "Countries. One energy story.",   color: "#F6A820" },
+              ].map((s, i) => (
+                <div
+                  key={i}
+                  className={`flex flex-col gap-2 pt-6 pb-2 ${i > 0 ? "pl-6 border-l border-white/10" : ""}`}
+                >
+                  <span className="font-serif text-[clamp(2rem,4vw,3.5rem)] leading-none font-black" style={{ color: s.color }}>
+                    {s.value}
+                  </span>
+                  <span className="font-sans text-[11px] tracking-[0.18em] uppercase text-white/35 leading-snug">
+                    {s.label}
+                  </span>
+                </div>
+              ))}
+            </motion.div>
+          </div>
+
         </div>
       </section>
 
@@ -205,14 +220,24 @@ export default function Home() {
       </div>
 
       {/* ══ 05 · CTA ════════════════════════════════════════════ */}
-      <section className="w-full bg-[#F5F0E8] px-8 md:px-14 py-28 md:py-36">
+      <section className="w-full bg-[#0C1A30] px-8 md:px-14 py-28 md:py-36 border-t border-white/8">
         <div className="max-w-[1400px] mx-auto">
+          <motion.span
+            initial={{ opacity: 0 }}
+            whileInView={{ opacity: 1 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.6 }}
+            className="font-sans text-[10px] tracking-[0.35em] uppercase text-white/25 block mb-8"
+          >
+            Partner With Us
+          </motion.span>
+
           <motion.h2
             initial={{ opacity: 0, y: 28 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 1, ease: [0.16, 1, 0.3, 1] }}
-            className="font-serif text-[clamp(3.5rem,9vw,128px)] text-ceti-dark leading-[0.88] tracking-tight max-w-[12ch]"
+            className="font-serif text-[clamp(3.5rem,9vw,128px)] text-white leading-[0.88] tracking-tight max-w-[12ch]"
           >
             Build the future<br />with us.
           </motion.h2>
@@ -226,13 +251,13 @@ export default function Home() {
           >
             <Link
               href="/contact"
-              className="inline-flex justify-center items-center px-9 py-4 bg-ceti-navy text-white font-sans text-sm font-semibold tracking-[0.18em] uppercase hover:bg-ceti-dark transition-colors duration-300"
+              className="inline-flex justify-center items-center px-9 py-4 bg-ceti-teal text-white font-sans text-sm font-semibold tracking-[0.18em] uppercase hover:bg-[#22958a] transition-colors duration-300"
             >
               Partner With Us
             </Link>
             <Link
               href="/contact"
-              className="inline-flex justify-center items-center px-9 py-4 border border-ceti-dark/25 text-ceti-dark font-sans text-sm font-semibold tracking-[0.18em] uppercase hover:border-ceti-dark transition-colors duration-300"
+              className="inline-flex justify-center items-center px-9 py-4 border border-white/20 text-white font-sans text-sm font-semibold tracking-[0.18em] uppercase hover:border-white/50 transition-colors duration-300"
             >
               Contact Us
             </Link>
