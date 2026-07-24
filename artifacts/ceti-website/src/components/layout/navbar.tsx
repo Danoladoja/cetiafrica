@@ -33,7 +33,7 @@ export default function Navbar() {
         transparent ? "bg-transparent text-ceti-cream" : "bg-ceti-dark text-ceti-cream"
       }`}
     >
-      <div className="flex items-center justify-between px-6 md:px-12 py-6">
+      <div className="flex items-center justify-between px-6 md:px-12 py-1">
         <Link href="/" className="z-50 focus:outline-none">
           <LogoWhite />
         </Link>
