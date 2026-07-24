@@ -21,7 +21,7 @@ function Router() {
       <Route path="/about" component={About} />
       <Route path="/programs" component={Programs} />
       <Route path="/publications" component={Publications} />
-      <Route path="/insights" component={Publications} /> {/* Map insights to publications for now */}
+      <Route path="/insights" component={Publications} />
       <Route path="/contact" component={Contact} />
       <Route component={NotFound} />
     </Switch>
@@ -33,9 +33,9 @@ function App() {
     <QueryClientProvider client={queryClient}>
       <TooltipProvider>
         <WouterRouter base={import.meta.env.BASE_URL.replace(/\/$/, '')}>
-          <div className="flex flex-col min-h-[100dvh]">
+          <div className="flex flex-col min-h-[100dvh] bg-ceti-dark text-ceti-cream selection:bg-ceti-orange selection:text-white">
             <Navbar />
-            <main className="flex-1 pt-20">
+            <main className="flex-1 w-full">
               <Router />
             </main>
             <Footer />

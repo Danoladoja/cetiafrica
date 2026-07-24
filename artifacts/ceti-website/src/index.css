@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400;1,600&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Syne:wght@400;500;600;700;800&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;1,9..40,300&display=swap');
 @import 'tailwindcss';
 @import 'tw-animate-css';
 @plugin "@tailwindcss/typography";
@@ -40,6 +40,7 @@
   --color-ceti-orange: hsl(var(--ceti-orange));
   --color-ceti-amber: hsl(var(--ceti-amber));
   --color-ceti-cream: hsl(var(--ceti-cream));
+  --color-ceti-dark: hsl(var(--ceti-dark));
 
   --font-sans: var(--app-font-sans);
   --font-serif: var(--app-font-serif);
@@ -57,19 +58,20 @@
   --ceti-orange: 17 83% 51%;
   --ceti-amber: 38 91% 55%;
   --ceti-cream: 40 27% 94%;
+  --ceti-dark: 216 28% 7%;
 
   --background: var(--ceti-cream);
-  --foreground: var(--ceti-navy);
+  --foreground: var(--ceti-dark);
   --border: 40 15% 85%;
   --input: 40 15% 85%;
-  --ring: var(--ceti-navy);
+  --ring: var(--ceti-orange);
 
-  --card: 0 0% 100%;
-  --card-foreground: var(--ceti-navy);
+  --card: 40 27% 94%;
+  --card-foreground: var(--ceti-dark);
   --card-border: 40 15% 85%;
 
-  --popover: 0 0% 100%;
-  --popover-foreground: var(--ceti-navy);
+  --popover: 40 27% 94%;
+  --popover-foreground: var(--ceti-dark);
   --popover-border: 40 15% 85%;
 
   --primary: var(--ceti-navy);
@@ -87,38 +89,38 @@
   --destructive: var(--ceti-orange);
   --destructive-foreground: 0 0% 100%;
 
-  --app-font-sans: 'Inter', sans-serif;
-  --app-font-serif: 'Playfair Display', serif;
+  --app-font-sans: 'DM Sans', sans-serif;
+  --app-font-serif: 'Syne', sans-serif;
   --app-font-mono: Menlo, monospace;
-  --radius: 0.5rem;
+  --radius: 0rem; /* Strictly no rounded corners */
 }
 
 .dark {
-  --background: var(--ceti-navy);
+  --background: var(--ceti-dark);
   --foreground: var(--ceti-cream);
-  --border: 222 30% 35%;
-  --input: 222 30% 35%;
-  --ring: var(--ceti-teal);
+  --border: 222 30% 15%;
+  --input: 222 30% 15%;
+  --ring: var(--ceti-orange);
 
-  --card: 222 45% 20%;
+  --card: 216 28% 7%;
   --card-foreground: var(--ceti-cream);
-  --card-border: 222 30% 35%;
+  --card-border: 222 30% 15%;
 
-  --popover: 222 45% 20%;
+  --popover: 216 28% 7%;
   --popover-foreground: var(--ceti-cream);
-  --popover-border: 222 30% 35%;
+  --popover-border: 222 30% 15%;
 
   --primary: var(--ceti-cream);
-  --primary-foreground: var(--ceti-navy);
+  --primary-foreground: var(--ceti-dark);
 
   --secondary: var(--ceti-teal);
   --secondary-foreground: 0 0% 100%;
 
-  --muted: 222 30% 30%;
-  --muted-foreground: 40 20% 80%;
+  --muted: 222 30% 15%;
+  --muted-foreground: 40 20% 60%;
 
   --accent: var(--ceti-amber);
-  --accent-foreground: var(--ceti-navy);
+  --accent-foreground: var(--ceti-dark);
 
   --destructive: var(--ceti-orange);
   --destructive-foreground: 0 0% 100%;
@@ -133,30 +135,5 @@
   }
   h1, h2, h3, h4, h5, h6 {
     @apply font-serif;
-  }
-}
-
-.marquee-container {
-  display: flex;
-  overflow: hidden;
-  user-select: none;
-  gap: 2rem;
-}
-
-.marquee-content {
-  flex-shrink: 0;
-  display: flex;
-  justify-content: space-around;
-  min-width: 100%;
-  gap: 2rem;
-  animation: scroll 30s linear infinite;
-}
-
-@keyframes scroll {
-  from {
-    transform: translateX(0);
-  }
-  to {
-    transform: translateX(calc(-100% - 2rem));
   }
 }

@@ -1,73 +1,108 @@
-import { useState } from "react";
 import { Link, useLocation } from "wouter";
-import { Logo } from "@/components/ui/logo";
-import { Button } from "@/components/ui/button";
+import cetiLogo from "@assets/ChatGPT_Image_Jul_24,_2026,_11_25_01_PM_1784932089497.png";
+import { useEffect, useState } from "react";
+import { motion, AnimatePresence } from "framer-motion";
 import { Menu, X } from "lucide-react";
 
 export default function Navbar() {
   const [location] = useLocation();
-  const [isOpen, setIsOpen] = useState(false);
+  const [scrolled, setScrolled] = useState(false);
+  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
-  const links = [
+  useEffect(() => {
+    const handleScroll = () => {
+      setScrolled(window.scrollY > 50);
+    };
+    window.addEventListener("scroll", handleScroll);
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
+
+  const navLinks = [
     { href: "/about", label: "About" },
     { href: "/programs", label: "Programs" },
     { href: "/publications", label: "Publications" },
-    { href: "/insights", label: "Insights" },
     { href: "/contact", label: "Contact" },
   ];
 
+  // We only want transparent nav on Home page when not scrolled
+  const isHome = location === "/";
+  const transparent = isHome && !scrolled && !mobileMenuOpen;
+
   return (
-    <header className="fixed top-0 w-full z-50 bg-background/90 backdrop-blur-md border-b border-border/50">
-      <div className="max-w-7xl mx-auto px-6 h-20 flex items-center justify-between">
-        <Link href="/">
-          <Logo />
+    <header
+      className={`fixed top-0 left-0 right-0 z-50 transition-colors duration-300 ${
+        transparent ? "bg-transparent text-ceti-cream" : "bg-ceti-dark text-ceti-cream"
+      }`}
+    >
+      <div className="flex items-center justify-between px-6 md:px-12 py-6">
+        <Link href="/" className="z-50 focus:outline-none">
+          <img 
+            src={cetiLogo} 
+            alt="CETI" 
+            className="h-10 md:h-12 w-auto transition-all"
+          />
         </Link>
-        
-        <nav className="hidden md:flex items-center gap-8">
-          {links.map((link) => (
+
+        {/* Desktop Nav */}
+        <nav className="hidden md:flex items-center gap-10 font-sans font-medium tracking-wide text-sm uppercase">
+          {navLinks.map((link) => (
             <Link 
               key={link.href} 
               href={link.href}
-              className={`text-sm font-medium transition-colors hover:text-ceti-orange ${location === link.href ? "text-ceti-orange" : "text-foreground"}`}
+              className="relative group py-2"
             >
               {link.label}
+              <span className="absolute left-0 bottom-0 w-0 h-0.5 bg-ceti-orange transition-all duration-300 group-hover:w-full" />
             </Link>
           ))}
+          <Link 
+            href="/contact"
+            className="text-ceti-teal hover:text-ceti-cream transition-colors duration-300"
+          >
+            Partner with us →
+          </Link>
         </nav>
-        
-        <div className="hidden md:flex items-center gap-4">
-          <Button asChild variant="default" className="bg-ceti-orange hover:bg-ceti-orange/90 text-white rounded-none uppercase tracking-wider text-xs font-semibold px-6 py-5">
-            <Link href="/contact">Partner with Us</Link>
-          </Button>
-        </div>
 
-        <button className="md:hidden text-foreground" onClick={() => setIsOpen(!isOpen)}>
-          {isOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
+        {/* Mobile Toggle */}
+        <button 
+          className="md:hidden z-50 p-2"
+          onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+        >
+          {mobileMenuOpen ? <X size={24} /> : <Menu size={24} />}
         </button>
       </div>
 
       {/* Mobile Menu */}
-      {isOpen && (
-        <div className="md:hidden absolute top-20 left-0 w-full bg-background border-b border-border/50 shadow-lg">
-          <div className="flex flex-col p-6 gap-4">
-            {links.map((link) => (
+      <AnimatePresence>
+        {mobileMenuOpen && (
+          <motion.div
+            initial={{ opacity: 0, y: -20 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: -20 }}
+            className="fixed inset-0 bg-ceti-dark text-ceti-cream z-40 flex flex-col pt-32 px-6 md:hidden"
+          >
+            <nav className="flex flex-col gap-8 font-serif text-4xl">
+              {navLinks.map((link) => (
+                <Link 
+                  key={link.href} 
+                  href={link.href}
+                  onClick={() => setMobileMenuOpen(false)}
+                  className="hover:text-ceti-orange transition-colors"
+                >
+                  {link.label}
+                </Link>
+              ))}
               <Link 
-                key={link.href} 
-                href={link.href}
-                onClick={() => setIsOpen(false)}
-                className={`text-lg font-medium transition-colors ${location === link.href ? "text-ceti-orange" : "text-foreground"}`}
+                href="/contact"
+                onClick={() => setMobileMenuOpen(false)}
+                className="text-ceti-teal hover:text-ceti-cream transition-colors mt-8"
               >
-                {link.label}
+                Partner with us →
               </Link>
-            ))}
-            <div className="pt-4 border-t border-border">
-              <Button asChild className="w-full bg-ceti-orange hover:bg-ceti-orange/90 text-white rounded-none uppercase tracking-wider text-sm font-semibold py-6">
-                <Link href="/contact" onClick={() => setIsOpen(false)}>Partner with Us</Link>
-              </Button>
-            </div>
-          </div>
-        </div>
-      )}
+            </nav>
+          </motion.div>
+        )}
+      </AnimatePresence>
     </header>
   );
 }
