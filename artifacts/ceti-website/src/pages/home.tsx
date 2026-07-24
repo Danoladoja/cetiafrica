@@ -41,24 +41,38 @@ export default function Home() {
         </motion.div>
 
         {/* Headline — vertically centred, bleeds to edges */}
-        <div className="absolute inset-0 z-10 flex flex-col justify-center px-8 md:px-14">
+        <div className="absolute inset-0 z-10 flex flex-col justify-center px-8 md:px-14 max-w-[1100px]">
+          {/* Eyebrow */}
+          <motion.span
+            initial={{ opacity: 0, y: 10 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8, ease: "easeOut", delay: 0.1 }}
+            className="font-sans text-[10px] tracking-[0.38em] uppercase text-ceti-teal mb-5 block"
+          >
+            Climate &amp; Energy Transition Initiative
+          </motion.span>
+
           <motion.h1
             initial={{ opacity: 0, y: 44 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 1.15, ease: [0.16, 1, 0.3, 1], delay: 0.1 }}
-            className="font-serif text-[clamp(4rem,13.5vw,196px)] leading-[0.86] text-white tracking-tight"
+            transition={{ duration: 1.15, ease: [0.16, 1, 0.3, 1], delay: 0.22 }}
+            className="font-serif text-[clamp(3.2rem,8.5vw,124px)] leading-[0.9] text-white tracking-tight"
           >
             The Knowledge<br />Infrastructure
           </motion.h1>
 
-          <motion.p
+          {/* Rule + subtitle in one line */}
+          <motion.div
             initial={{ opacity: 0, y: 14 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.9, ease: "easeOut", delay: 0.72 }}
-            className="mt-5 font-sans text-xl md:text-2xl text-white/38 font-light tracking-wide"
+            transition={{ duration: 0.9, ease: "easeOut", delay: 0.75 }}
+            className="mt-6 flex items-center gap-4"
           >
-            For Africa's Energy Transition
-          </motion.p>
+            <span className="block w-8 h-px bg-white/30 shrink-0" />
+            <p className="font-sans text-base md:text-lg text-white/58 font-light tracking-[0.06em]">
+              For Africa's Energy Transition
+            </p>
+          </motion.div>
         </div>
 
         {/* Scroll line */}
@@ -78,49 +92,50 @@ export default function Home() {
       {/* ══ 02 · STATEMENT ══════════════════════════════════════ */}
       <section className="w-full bg-ceti-navy overflow-hidden">
 
-        {/* Big stat */}
+        {/* Big stat + label inline */}
         <motion.div
           initial={{ opacity: 0, y: 40 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, margin: "-10%" }}
           transition={{ duration: 1, ease: [0.16, 1, 0.3, 1] }}
-          className="px-8 md:px-14 pt-24 pb-12 border-b border-white/8"
+          className="px-8 md:px-14 pt-20 pb-10 border-b border-white/8"
         >
           <div className="flex items-end gap-5 md:gap-8">
-            <span className="font-serif text-[clamp(7rem,24vw,348px)] leading-[0.82] text-ceti-orange select-none">
+            <span className="font-serif text-[clamp(5rem,15vw,180px)] leading-[0.85] text-ceti-orange select-none">
               600M
             </span>
-            <div className="pb-3 md:pb-8 flex flex-col gap-1">
-              <span className="font-sans text-base md:text-lg tracking-[0.22em] uppercase text-white/35">
+            <div className="pb-1 md:pb-4 flex flex-col gap-1">
+              <span className="font-sans text-sm md:text-base tracking-[0.22em] uppercase text-white/35">
                 Africans without<br />reliable electricity — today
               </span>
             </div>
           </div>
         </motion.div>
 
-        {/* Statement + fact row */}
-        <div className="px-8 md:px-14 py-20 md:py-28 grid md:grid-cols-2 gap-16 md:gap-24">
+        {/* Statement + stat pills */}
+        <div className="px-8 md:px-14 py-14 md:py-20 grid md:grid-cols-2 gap-12 md:gap-20 items-center">
           <motion.p
             initial={{ opacity: 0, y: 32 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true, margin: "-8%" }}
             transition={{ duration: 1, ease: [0.16, 1, 0.3, 1] }}
-            className="font-serif text-[clamp(1.8rem,3.2vw,4rem)] text-white leading-[1.1] tracking-tight"
+            className="font-serif text-[clamp(1.6rem,2.6vw,3.2rem)] text-white leading-[1.15] tracking-tight"
           >
             Africa holds the world's greatest solar potential and the fastest-growing
             energy markets on earth. The missing link is knowledge.
           </motion.p>
 
+          {/* 3 pills in a row on desktop */}
           <motion.div
             initial={{ opacity: 0, y: 32 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true, margin: "-8%" }}
             transition={{ duration: 1, ease: [0.16, 1, 0.3, 1], delay: 0.15 }}
-            className="flex flex-col justify-between gap-12"
+            className="grid grid-cols-3 gap-6 md:gap-4"
           >
-            <StatPill value="60%"  label="of global solar irradiance"   color="#2AA89C" />
-            <StatPill value="3×"   label="Africa's power demand by 2040" color="#E8551A" />
-            <StatPill value="54"   label="Countries. One energy story."  color="#F6A820" />
+            <StatPill value="60%"  label="of global solar irradiance"    color="#2AA89C" />
+            <StatPill value="3×"   label="Africa's power demand by 2040"  color="#E8551A" />
+            <StatPill value="54"   label="Countries. One energy story."   color="#F6A820" />
           </motion.div>
         </div>
       </section>

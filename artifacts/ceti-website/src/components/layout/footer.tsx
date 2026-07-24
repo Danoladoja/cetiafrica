@@ -1,26 +1,28 @@
 import { Link } from "wouter";
-import cetiLogo from "@assets/ChatGPT_Image_Jul_24,_2026,_11_25_01_PM_1784932089497.png";
+import { LogoWhite } from "@/components/ui/logo";
 
 export default function Footer() {
   return (
-    <footer className="bg-black text-ceti-cream py-16 px-6 md:px-12 mt-auto">
-      <div className="flex flex-col md:flex-row justify-between items-start md:items-end gap-12">
-        <div>
-          <img src={cetiLogo} alt="CETI" className="w-[80px] brightness-0 invert mb-8" />
+    <footer className="bg-[#0D1117] text-ceti-cream py-14 px-8 md:px-14 mt-auto border-t border-white/8">
+      <div className="flex flex-col md:flex-row justify-between items-start md:items-end gap-10">
+
+        {/* Logo */}
+        <div className="opacity-80 hover:opacity-100 transition-opacity">
+          <LogoWhite />
         </div>
-        
-        <div className="flex flex-col items-start md:items-end gap-8">
-          <nav className="flex gap-6 font-sans text-sm tracking-wide uppercase text-gray-400">
-            <Link href="/about" className="hover:text-ceti-cream transition-colors">About</Link>
-            <Link href="/programs" className="hover:text-ceti-cream transition-colors">Programs</Link>
-            <Link href="/publications" className="hover:text-ceti-cream transition-colors">Publications</Link>
-            <Link href="/contact" className="hover:text-ceti-cream transition-colors">Contact</Link>
+
+        {/* Right column */}
+        <div className="flex flex-col items-start md:items-end gap-6">
+          <nav className="flex flex-wrap gap-x-8 gap-y-2 font-sans text-xs tracking-[0.22em] uppercase text-white/40">
+            <Link href="/about"    className="hover:text-white transition-colors">About</Link>
+            <Link href="/programs" className="hover:text-white transition-colors">Programs</Link>
+            <Link href="/contact"  className="hover:text-white transition-colors">Contact</Link>
           </nav>
-          
-          <p className="font-sans text-xs text-gray-600">
+          <p className="font-sans text-xs text-white/20">
             © {new Date().getFullYear()} Climate and Energy Transition Initiative. All rights reserved.
           </p>
         </div>
+
       </div>
     </footer>
   );
