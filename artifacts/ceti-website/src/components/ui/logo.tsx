@@ -1,5 +1,3 @@
-import { Link } from "wouter";
-
 export function Logo() {
   return (
     <div className="flex items-center gap-3">
@@ -12,6 +10,34 @@ export function Logo() {
       <div className="flex flex-col justify-center leading-[1.1]">
         <span className="font-sans font-medium text-[10px] tracking-widest uppercase text-foreground">Climate and Energy</span>
         <span className="font-sans font-medium text-[10px] tracking-widest uppercase text-foreground">Transition Initiative</span>
+      </div>
+    </div>
+  );
+}
+
+/** Monochrome white variant — for dark/transparent nav backgrounds */
+export function LogoWhite() {
+  return (
+    <div className="flex items-center gap-3">
+      <div className="flex gap-[3px]">
+        {['C', 'E', 'T', 'I'].map((letter) => (
+          <div
+            key={letter}
+            className="w-7 h-7 flex items-center justify-center border border-white/80"
+          >
+            <span className="font-sans font-bold text-xs text-white leading-none">
+              {letter}
+            </span>
+          </div>
+        ))}
+      </div>
+      <div className="flex flex-col justify-center leading-[1.2]">
+        <span className="font-sans font-medium text-[9px] tracking-[0.18em] uppercase text-white/80">
+          Climate and Energy
+        </span>
+        <span className="font-sans font-medium text-[9px] tracking-[0.18em] uppercase text-white/80">
+          Transition Initiative
+        </span>
       </div>
     </div>
   );

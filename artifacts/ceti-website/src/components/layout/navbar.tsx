@@ -1,5 +1,5 @@
 import { Link, useLocation } from "wouter";
-import cetiLogo from "@assets/ChatGPT_Image_Jul_24,_2026,_11_25_01_PM_1784932089497.png";
+import { LogoWhite } from "@/components/ui/logo";
 import { useEffect, useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Menu, X } from "lucide-react";
@@ -36,11 +36,7 @@ export default function Navbar() {
     >
       <div className="flex items-center justify-between px-6 md:px-12 py-6">
         <Link href="/" className="z-50 focus:outline-none">
-          <img 
-            src={cetiLogo} 
-            alt="CETI" 
-            className="h-10 md:h-12 w-auto transition-all"
-          />
+          <LogoWhite />
         </Link>
 
         {/* Desktop Nav */}
