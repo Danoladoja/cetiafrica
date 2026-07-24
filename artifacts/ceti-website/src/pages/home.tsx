@@ -41,29 +41,29 @@ export default function Home() {
             alt="African solar energy farm"
             className="w-full h-full object-cover scale-110"
           />
-          <div className="absolute inset-0 bg-[#0D1117]/70" />
+          <div className="absolute inset-0 bg-[#0D1117]/65" />
           <div className="absolute inset-x-0 top-0 h-40 bg-gradient-to-b from-black/50 to-transparent" />
-          <div className="absolute inset-x-0 bottom-0 h-64 bg-gradient-to-t from-[#0D1117] to-transparent" />
+          <div className="absolute inset-x-0 bottom-0 h-48 bg-gradient-to-t from-[#0D1117] to-transparent" />
         </motion.div>
 
-        {/* Text — bottom-left anchored */}
-        <div className="absolute inset-0 z-10 flex flex-col justify-end px-10 md:px-16 pb-20 md:pb-24">
+        {/* Text — bottom-left, screen-filling */}
+        <div className="absolute inset-0 z-10 flex flex-col justify-end px-8 md:px-14 pb-14 md:pb-18">
           <motion.h1
-            initial={{ opacity: 0, y: 32 }}
+            initial={{ opacity: 0, y: 40 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 1.1, ease: [0.16, 1, 0.3, 1], delay: 0.15 }}
-            className="font-serif text-[clamp(2.8rem,7.5vw,7.5rem)] leading-[0.9] text-white tracking-tight"
+            className="font-serif text-[clamp(3.5rem,10.5vw,152px)] leading-[0.88] text-white tracking-tight"
           >
-            The knowledge<br />infrastructure
+            The Knowledge<br />Infrastructure
           </motion.h1>
 
           <motion.p
-            initial={{ opacity: 0, y: 16 }}
+            initial={{ opacity: 0, y: 12 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.9, ease: "easeOut", delay: 0.65 }}
-            className="mt-5 font-sans text-lg md:text-xl text-white/45 font-light tracking-wide"
+            className="mt-3 font-sans text-xl md:text-2xl text-white/45 font-light tracking-wide"
           >
-            for Africa's energy transition
+            For Africa's Energy Transition
           </motion.p>
         </div>
 
@@ -83,51 +83,69 @@ export default function Home() {
       </section>
 
       {/* ── PROGRAMS ─────────────────────────────────────────── */}
-      <section className="w-full border-t border-white/8">
-        {programs.map((p, i) => (
-          <motion.div
-            key={p.number}
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true, margin: "-10%" }}
-            transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1], delay: i * 0.08 }}
-          >
-            <Link
-              href={p.href}
-              className="group flex items-start md:items-center justify-between gap-8 px-10 md:px-16 py-12 md:py-14 border-b border-white/8 transition-colors duration-300 hover:bg-white/[0.025] block"
+      <section className="w-full px-8 md:px-14 pt-20 pb-24">
+
+        {/* Section label */}
+        <motion.p
+          initial={{ opacity: 0 }}
+          whileInView={{ opacity: 1 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.6 }}
+          className="font-sans text-[10px] tracking-[0.35em] uppercase text-white/25 mb-14"
+        >
+          Our Programs
+        </motion.p>
+
+        {/* 3-column grid */}
+        <div className="grid grid-cols-1 md:grid-cols-3 divide-y md:divide-y-0 md:divide-x divide-white/10 border border-white/10">
+          {programs.map((p, i) => (
+            <motion.div
+              key={p.number}
+              initial={{ opacity: 0, y: 28 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, margin: "-8%" }}
+              transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1], delay: i * 0.1 }}
             >
-              {/* Left: number + name */}
-              <div className="flex items-start md:items-baseline gap-8 md:gap-12">
+              <Link
+                href={p.href}
+                className="group flex flex-col gap-8 p-10 md:p-12 h-full transition-colors duration-300 hover:bg-white/[0.03] block"
+              >
+                {/* Number */}
                 <span
-                  className="font-sans text-xs font-bold tracking-[0.25em] uppercase shrink-0 mt-2 md:mt-0"
+                  className="font-sans text-[4rem] font-black leading-none tabular-nums transition-opacity duration-300 group-hover:opacity-100 opacity-70"
                   style={{ color: p.color }}
                 >
                   {p.number}
                 </span>
-                <h2 className="font-serif text-[clamp(2rem,4.5vw,4.5rem)] text-white leading-tight tracking-tight group-hover:text-white/80 transition-colors duration-300">
+
+                {/* Name */}
+                <h2 className="font-serif text-[clamp(1.8rem,2.6vw,3rem)] text-white leading-[1.05] tracking-tight flex-1">
                   {p.name}
                 </h2>
-              </div>
 
-              {/* Right: tag + arrow */}
-              <div className="hidden md:flex items-center gap-10 shrink-0">
-                <span className="font-sans text-sm text-white/35 tracking-wide">
-                  {p.tag}
-                </span>
-                <span
-                  className="font-sans text-sm font-semibold tracking-[0.2em] uppercase transition-transform duration-300 group-hover:translate-x-2 inline-block"
-                  style={{ color: p.color }}
-                >
-                  Explore →
-                </span>
-              </div>
-            </Link>
-          </motion.div>
-        ))}
+                {/* Divider */}
+                <div className="h-px bg-white/10 w-full" />
+
+                {/* Tag + arrow */}
+                <div className="flex items-center justify-between">
+                  <span className="font-sans text-xs tracking-[0.22em] uppercase text-white/35">
+                    {p.tag}
+                  </span>
+                  <span
+                    className="font-sans text-sm font-bold tracking-[0.15em] transition-transform duration-300 group-hover:translate-x-1.5 inline-block"
+                    style={{ color: p.color }}
+                  >
+                    →
+                  </span>
+                </div>
+              </Link>
+            </motion.div>
+          ))}
+        </div>
       </section>
 
       {/* ── CONTACT STRIP ────────────────────────────────────── */}
-      <section className="w-full bg-ceti-navy py-28 px-10 md:px-16">
+      <section className="w-full bg-ceti-navy py-28 px-8 md:px-14">
         <div className="max-w-[1400px] mx-auto flex flex-col md:flex-row items-start md:items-center justify-between gap-10">
           <motion.h2
             initial={{ opacity: 0, y: 20 }}
@@ -149,13 +167,13 @@ export default function Home() {
               href="/contact"
               className="inline-flex justify-center items-center px-8 py-4 bg-ceti-orange text-white font-sans text-sm font-semibold tracking-[0.15em] uppercase hover:bg-white hover:text-ceti-orange transition-colors duration-300"
             >
-              Partner with us
+              Partner With Us
             </Link>
             <Link
               href="/contact"
               className="inline-flex justify-center items-center px-8 py-4 border border-white/30 text-white font-sans text-sm font-semibold tracking-[0.15em] uppercase hover:border-white transition-colors duration-300"
             >
-              Contact us
+              Contact Us
             </Link>
           </motion.div>
         </div>
