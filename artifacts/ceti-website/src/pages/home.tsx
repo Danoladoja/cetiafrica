@@ -13,7 +13,7 @@ const programs = [
 function StatPill({ value, label, color }: { value: string; label: string; color: string }) {
   return (
     <div className="flex flex-col gap-2">
-      <span className="font-serif text-[clamp(2.4rem,5vw,5rem)] leading-none font-black" style={{ color }}>
+      <span className="font-serif text-[clamp(2.4rem,5vw,5rem)] leading-none font-extrabold" style={{ color }}>
         {value}
       </span>
       <span className="font-sans text-sm tracking-[0.2em] uppercase text-white/40">{label}</span>
@@ -49,7 +49,7 @@ export default function Home() {
             transition={{ duration: 0.8, ease: "easeOut", delay: 0.1 }}
             className="font-sans text-[10px] tracking-[0.38em] uppercase text-ceti-teal mb-5 block"
           >
-            Climate &amp; Energy Transition Initiative
+            We Are Building
           </motion.span>
 
           <motion.h1
@@ -141,7 +141,7 @@ export default function Home() {
                   key={i}
                   className={`flex flex-col gap-2 pt-6 pb-2 ${i > 0 ? "pl-6 border-l border-white/10" : ""}`}
                 >
-                  <span className="font-serif text-[clamp(2rem,4vw,3.5rem)] leading-none font-black" style={{ color: s.color }}>
+                  <span className="font-serif text-[clamp(2rem,4vw,3.5rem)] leading-none font-extrabold" style={{ color: s.color }}>
                     {s.value}
                   </span>
                   <span className="font-sans text-[11px] tracking-[0.18em] uppercase text-white/35 leading-snug">
