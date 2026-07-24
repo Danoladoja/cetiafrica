@@ -1,226 +1,159 @@
 import { motion, useScroll, useTransform } from "framer-motion";
 import { Link } from "wouter";
-import { useRef } from "react";
 import heroBg from "@assets/generated_images/hero-bg.jpg";
-import pulseImg from "@assets/generated_images/pulse-illustration.jpg";
-import commsImg from "@assets/generated_images/comms-illustration.jpg";
-import trackerImg from "@assets/generated_images/tracker-illustration.jpg";
 
 const programs = [
   {
     number: "01",
-    name: "Africa Energy\nPulse",
+    name: "Africa Energy Pulse",
     tag: "Journalism",
     color: "#2AA89C",
-    borderColor: "border-l-[#2AA89C]",
-    ghostColor: "text-[#2AA89C]",
-    img: pulseImg,
     href: "/programs",
   },
   {
     number: "02",
-    name: "AfriEnergy\nTracker",
+    name: "AfriEnergy Tracker",
     tag: "Market Intelligence",
     color: "#E8551A",
-    borderColor: "border-l-[#E8551A]",
-    ghostColor: "text-[#E8551A]",
-    img: trackerImg,
     href: "/programs",
-    flip: true,
   },
   {
     number: "03",
-    name: "AfriEnergy\nComms Lab",
+    name: "AfriEnergy Comms Lab",
     tag: "Strategic Communications",
     color: "#F6A820",
-    borderColor: "border-l-[#F6A820]",
-    ghostColor: "text-[#F6A820]",
-    img: commsImg,
     href: "/programs",
   },
 ];
 
-function ProgramPanel({ p, index }: { p: typeof programs[0]; index: number }) {
-  const ref = useRef<HTMLDivElement>(null);
-  const { scrollYProgress } = useScroll({ target: ref, offset: ["start end", "end start"] });
-  const imgScale = useTransform(scrollYProgress, [0, 1], [1.08, 1.0]);
-
-  return (
-    <div
-      ref={ref}
-      className={`relative w-full h-screen overflow-hidden border-l-4 ${p.borderColor}`}
-    >
-      {/* Full-bleed background image with parallax scale */}
-      <motion.div className="absolute inset-0 z-0" style={{ scale: imgScale }}>
-        <img
-          src={p.img}
-          alt={p.name}
-          className="w-full h-full object-cover"
-        />
-      </motion.div>
-
-      {/* Directional gradient overlay — text side gets dark, opposite fades */}
-      <div
-        className="absolute inset-0 z-10"
-        style={{
-          background: p.flip
-            ? `linear-gradient(to left, rgba(13,17,23,0.92) 0%, rgba(13,17,23,0.7) 45%, rgba(13,17,23,0.1) 100%)`
-            : `linear-gradient(to right, rgba(13,17,23,0.92) 0%, rgba(13,17,23,0.7) 45%, rgba(13,17,23,0.1) 100%)`,
-        }}
-      />
-
-      {/* Ghost program number — far background */}
-      <div
-        className={`absolute z-10 pointer-events-none select-none leading-none font-sans font-black opacity-[0.04] ${p.ghostColor}`}
-        style={{
-          fontSize: "32vw",
-          bottom: "-4vw",
-          ...(p.flip ? { right: "2vw" } : { left: "2vw" }),
-        }}
-      >
-        {p.number}
-      </div>
-
-      {/* Content */}
-      <motion.div
-        className={`absolute z-20 top-1/2 -translate-y-1/2 flex flex-col gap-6 px-12 md:px-20 max-w-[52rem] ${p.flip ? "right-0" : "left-0"}`}
-        initial={{ opacity: 0, x: p.flip ? 40 : -40 }}
-        whileInView={{ opacity: 1, x: 0 }}
-        viewport={{ once: true, margin: "-15%" }}
-        transition={{ duration: 0.9, ease: [0.16, 1, 0.3, 1] }}
-      >
-        {/* Tag */}
-        <span
-          className="font-sans text-xs font-semibold tracking-[0.3em] uppercase"
-          style={{ color: p.color }}
-        >
-          {p.tag}
-        </span>
-
-        {/* Program name */}
-        <h2 className="font-serif text-[clamp(3.5rem,8.5vw,8rem)] text-white leading-[0.88] tracking-tight whitespace-pre-line">
-          {p.name}
-        </h2>
-
-        {/* CTA */}
-        <Link
-          href={p.href}
-          className="inline-flex items-center gap-3 font-sans text-sm font-semibold tracking-[0.25em] uppercase transition-all duration-300 group mt-2"
-          style={{ color: p.color }}
-        >
-          Explore
-          <span className="inline-block transition-transform duration-300 group-hover:translate-x-2">→</span>
-        </Link>
-      </motion.div>
-
-      {/* Index tick at bottom right */}
-      <div className="absolute bottom-8 right-10 z-20 flex items-center gap-3 opacity-30">
-        <div className="w-8 h-px bg-white" />
-        <span className="font-sans text-xs tracking-widest text-white">{p.number} / 03</span>
-      </div>
-    </div>
-  );
-}
-
 export default function Home() {
   const { scrollY } = useScroll();
-  const heroY = useTransform(scrollY, [0, 800], [0, 220]);
+  const heroY = useTransform(scrollY, [0, 800], [0, 180]);
 
   return (
-    <div className="bg-ceti-dark w-full overflow-hidden">
+    <div className="bg-[#0D1117] w-full overflow-hidden">
 
       {/* ── HERO ─────────────────────────────────────────────── */}
-      <section className="relative w-full h-[100dvh] flex items-center justify-center overflow-hidden">
+      <section className="relative w-full h-[100dvh] overflow-hidden">
         <motion.div className="absolute inset-0 z-0" style={{ y: heroY }}>
           <img
             src={heroBg}
-            alt="African solar energy farm at golden hour"
-            className="w-full h-full object-cover scale-105"
+            alt="African solar energy farm"
+            className="w-full h-full object-cover scale-110"
           />
-          <div className="absolute inset-0 bg-ceti-dark/65" />
-          <div className="absolute inset-x-0 top-0 h-40 bg-gradient-to-b from-black/60 to-transparent pointer-events-none" />
-          <div className="absolute inset-x-0 bottom-0 h-48 bg-gradient-to-t from-ceti-dark to-transparent pointer-events-none" />
+          <div className="absolute inset-0 bg-[#0D1117]/70" />
+          <div className="absolute inset-x-0 top-0 h-40 bg-gradient-to-b from-black/50 to-transparent" />
+          <div className="absolute inset-x-0 bottom-0 h-64 bg-gradient-to-t from-[#0D1117] to-transparent" />
         </motion.div>
 
-        <div className="relative z-10 w-full px-10 md:px-20 flex flex-col items-start justify-end pb-20 h-full pt-28">
-          <motion.p
-            initial={{ opacity: 0, y: 16 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, ease: "easeOut", delay: 0.1 }}
-            className="font-sans text-xs font-semibold tracking-[0.3em] uppercase text-ceti-teal mb-6"
-          >
-            Pan-African · Non-Profit · Knowledge Infrastructure
-          </motion.p>
-
+        {/* Text — bottom-left anchored */}
+        <div className="absolute inset-0 z-10 flex flex-col justify-end px-10 md:px-16 pb-20 md:pb-24">
           <motion.h1
-            initial={{ opacity: 0, y: 40 }}
+            initial={{ opacity: 0, y: 32 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 1.1, ease: [0.16, 1, 0.3, 1], delay: 0.2 }}
-            className="font-serif text-[clamp(3.2rem,9.5vw,9.5rem)] leading-[0.88] text-white tracking-tight max-w-[14ch]"
+            transition={{ duration: 1.1, ease: [0.16, 1, 0.3, 1], delay: 0.15 }}
+            className="font-serif text-[clamp(2.8rem,7.5vw,7.5rem)] leading-[0.9] text-white tracking-tight"
           >
-            Africa's Energy Future.
+            The knowledge<br />infrastructure
           </motion.h1>
 
           <motion.p
-            initial={{ opacity: 0, y: 20 }}
+            initial={{ opacity: 0, y: 16 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.9, ease: "easeOut", delay: 0.7 }}
-            className="mt-7 font-sans text-base md:text-lg text-white/50 font-light tracking-wide max-w-xs leading-relaxed"
+            transition={{ duration: 0.9, ease: "easeOut", delay: 0.65 }}
+            className="mt-5 font-sans text-lg md:text-xl text-white/45 font-light tracking-wide"
           >
-            The knowledge infrastructure for Africa's energy transition.
+            for Africa's energy transition
           </motion.p>
         </div>
 
-        {/* Scroll pulse */}
+        {/* Scroll indicator */}
         <motion.div
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
-          transition={{ duration: 1, delay: 1.4 }}
-          className="absolute bottom-12 left-1/2 -translate-x-1/2"
+          transition={{ delay: 1.5 }}
+          className="absolute bottom-10 right-12 z-10"
         >
           <motion.div
-            animate={{ y: [0, 10, 0], opacity: [0.4, 1, 0.4] }}
-            transition={{ duration: 2, repeat: Infinity, ease: "easeInOut" }}
-            className="w-px h-14 bg-white/40 mx-auto"
+            animate={{ y: [0, 8, 0], opacity: [0.3, 0.8, 0.3] }}
+            transition={{ duration: 2.2, repeat: Infinity, ease: "easeInOut" }}
+            className="w-px h-12 bg-white/30 mx-auto"
           />
         </motion.div>
       </section>
 
       {/* ── PROGRAMS ─────────────────────────────────────────── */}
-      <section className="w-full">
+      <section className="w-full border-t border-white/8">
         {programs.map((p, i) => (
-          <ProgramPanel key={p.number} p={p} index={i} />
+          <motion.div
+            key={p.number}
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, margin: "-10%" }}
+            transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1], delay: i * 0.08 }}
+          >
+            <Link
+              href={p.href}
+              className="group flex items-start md:items-center justify-between gap-8 px-10 md:px-16 py-12 md:py-14 border-b border-white/8 transition-colors duration-300 hover:bg-white/[0.025] block"
+            >
+              {/* Left: number + name */}
+              <div className="flex items-start md:items-baseline gap-8 md:gap-12">
+                <span
+                  className="font-sans text-xs font-bold tracking-[0.25em] uppercase shrink-0 mt-2 md:mt-0"
+                  style={{ color: p.color }}
+                >
+                  {p.number}
+                </span>
+                <h2 className="font-serif text-[clamp(2rem,4.5vw,4.5rem)] text-white leading-tight tracking-tight group-hover:text-white/80 transition-colors duration-300">
+                  {p.name}
+                </h2>
+              </div>
+
+              {/* Right: tag + arrow */}
+              <div className="hidden md:flex items-center gap-10 shrink-0">
+                <span className="font-sans text-sm text-white/35 tracking-wide">
+                  {p.tag}
+                </span>
+                <span
+                  className="font-sans text-sm font-semibold tracking-[0.2em] uppercase transition-transform duration-300 group-hover:translate-x-2 inline-block"
+                  style={{ color: p.color }}
+                >
+                  Explore →
+                </span>
+              </div>
+            </Link>
+          </motion.div>
         ))}
       </section>
 
       {/* ── CONTACT STRIP ────────────────────────────────────── */}
-      <section className="w-full bg-ceti-navy py-32 px-6 md:px-16">
-        <div className="max-w-[1400px] mx-auto flex flex-col md:flex-row items-start md:items-center justify-between gap-12">
+      <section className="w-full bg-ceti-navy py-28 px-10 md:px-16">
+        <div className="max-w-[1400px] mx-auto flex flex-col md:flex-row items-start md:items-center justify-between gap-10">
           <motion.h2
-            initial={{ opacity: 0, y: 24 }}
+            initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.8 }}
-            className="font-serif text-4xl md:text-6xl text-white max-w-xl leading-tight"
+            className="font-serif text-4xl md:text-5xl text-white max-w-lg leading-tight"
           >
             Let's build Africa's energy future together.
           </motion.h2>
           <motion.div
-            initial={{ opacity: 0, y: 24 }}
+            initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
-            transition={{ duration: 0.8, delay: 0.15 }}
-            className="flex flex-col sm:flex-row gap-5 shrink-0"
+            transition={{ duration: 0.8, delay: 0.12 }}
+            className="flex flex-col sm:flex-row gap-4 shrink-0"
           >
             <Link
               href="/contact"
-              className="inline-flex justify-center items-center px-8 py-5 bg-ceti-orange text-white font-sans text-sm font-semibold tracking-[0.15em] uppercase hover:bg-white hover:text-ceti-orange transition-colors duration-300"
+              className="inline-flex justify-center items-center px-8 py-4 bg-ceti-orange text-white font-sans text-sm font-semibold tracking-[0.15em] uppercase hover:bg-white hover:text-ceti-orange transition-colors duration-300"
             >
               Partner with us
             </Link>
             <Link
               href="/contact"
-              className="inline-flex justify-center items-center px-8 py-5 border border-white/40 text-white font-sans text-sm font-semibold tracking-[0.15em] uppercase hover:border-white transition-colors duration-300"
+              className="inline-flex justify-center items-center px-8 py-4 border border-white/30 text-white font-sans text-sm font-semibold tracking-[0.15em] uppercase hover:border-white transition-colors duration-300"
             >
               Contact us
             </Link>
