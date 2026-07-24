@@ -6,7 +6,6 @@ import { Route, Switch, Router as WouterRouter } from 'wouter';
 import Home from '@/pages/home';
 import About from '@/pages/about';
 import Programs from '@/pages/programs';
-import Publications from '@/pages/publications';
 import Contact from '@/pages/contact';
 import NotFound from '@/pages/not-found';
 import Navbar from '@/components/layout/navbar';
@@ -20,8 +19,6 @@ function Router() {
       <Route path="/" component={Home} />
       <Route path="/about" component={About} />
       <Route path="/programs" component={Programs} />
-      <Route path="/publications" component={Publications} />
-      <Route path="/insights" component={Publications} />
       <Route path="/contact" component={Contact} />
       <Route component={NotFound} />
     </Switch>
