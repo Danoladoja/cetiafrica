@@ -2,16 +2,16 @@ import { motion, useScroll, useTransform } from "framer-motion";
 import { Link } from "wouter";
 import { useRef } from "react";
 import heroBg from "@assets/generated_images/hero-bg.jpg";
-import pulseImg from "@assets/generated_images/pulse-img.jpg";
-import commsImg from "@assets/generated_images/comms-img.jpg";
+import pulseImg from "@assets/generated_images/pulse-illustration.jpg";
+import commsImg from "@assets/generated_images/comms-illustration.jpg";
+import trackerImg from "@assets/generated_images/tracker-illustration.jpg";
 
 const programs = [
   {
     number: "01",
     name: "Africa Energy\nPulse",
     tag: "Journalism",
-    line: "The continent's most trusted energy reporting.",
-    color: "#2AA89C",       // teal
+    color: "#2AA89C",
     borderColor: "border-l-[#2AA89C]",
     ghostColor: "text-[#2AA89C]",
     img: pulseImg,
@@ -21,11 +21,10 @@ const programs = [
     number: "02",
     name: "AfriEnergy\nTracker",
     tag: "Market Intelligence",
-    line: "Data and analysis for Africa's energy economy.",
-    color: "#E8551A",       // orange
+    color: "#E8551A",
     borderColor: "border-l-[#E8551A]",
     ghostColor: "text-[#E8551A]",
-    img: heroBg,
+    img: trackerImg,
     href: "/programs",
     flip: true,
   },
@@ -33,8 +32,7 @@ const programs = [
     number: "03",
     name: "AfriEnergy\nComms Lab",
     tag: "Strategic Communications",
-    line: "Shaping the narrative for Africa's energy future.",
-    color: "#F6A820",       // amber
+    color: "#F6A820",
     borderColor: "border-l-[#F6A820]",
     ghostColor: "text-[#F6A820]",
     img: commsImg,
@@ -100,22 +98,14 @@ function ProgramPanel({ p, index }: { p: typeof programs[0]; index: number }) {
         </span>
 
         {/* Program name */}
-        <h2 className="font-serif text-[clamp(3rem,7vw,6.5rem)] text-white leading-[0.9] tracking-tight whitespace-pre-line">
+        <h2 className="font-serif text-[clamp(3.5rem,8.5vw,8rem)] text-white leading-[0.88] tracking-tight whitespace-pre-line">
           {p.name}
         </h2>
-
-        {/* Divider */}
-        <div className="w-12 h-px" style={{ backgroundColor: p.color }} />
-
-        {/* One-line description */}
-        <p className="font-sans text-xl md:text-2xl text-white/70 font-light leading-relaxed">
-          {p.line}
-        </p>
 
         {/* CTA */}
         <Link
           href={p.href}
-          className="inline-flex items-center gap-3 font-sans text-sm font-semibold tracking-[0.2em] uppercase transition-all duration-300 group"
+          className="inline-flex items-center gap-3 font-sans text-sm font-semibold tracking-[0.25em] uppercase transition-all duration-300 group mt-2"
           style={{ color: p.color }}
         >
           Explore
@@ -152,22 +142,33 @@ export default function Home() {
           <div className="absolute inset-x-0 bottom-0 h-48 bg-gradient-to-t from-ceti-dark to-transparent pointer-events-none" />
         </motion.div>
 
-        <div className="relative z-10 text-center w-full px-6 flex flex-col items-center">
-          <motion.h1
-            initial={{ opacity: 0, y: 36 }}
+        <div className="relative z-10 w-full px-10 md:px-20 flex flex-col items-start justify-end pb-20 h-full pt-28">
+          <motion.p
+            initial={{ opacity: 0, y: 16 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 1.1, ease: [0.16, 1, 0.3, 1], delay: 0.15 }}
-            className="font-serif text-[clamp(2.4rem,9vw,9rem)] leading-[0.88] text-ceti-cream tracking-tight max-w-[18ch]"
+            transition={{ duration: 0.8, ease: "easeOut", delay: 0.1 }}
+            className="font-sans text-xs font-semibold tracking-[0.3em] uppercase text-ceti-teal mb-6"
           >
-            The Knowledge Infrastructure for Africa's Energy Future
+            Pan-African · Non-Profit · Knowledge Infrastructure
+          </motion.p>
+
+          <motion.h1
+            initial={{ opacity: 0, y: 40 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 1.1, ease: [0.16, 1, 0.3, 1], delay: 0.2 }}
+            className="font-serif text-[clamp(3.2rem,9.5vw,9.5rem)] leading-[0.88] text-white tracking-tight max-w-[14ch]"
+          >
+            Africa's Energy Future.
           </motion.h1>
 
-          <motion.div
-            initial={{ scaleX: 0 }}
-            animate={{ scaleX: 1 }}
-            transition={{ duration: 0.8, delay: 0.9, ease: "easeOut" }}
-            className="mt-10 w-16 h-px bg-ceti-teal origin-left"
-          />
+          <motion.p
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.9, ease: "easeOut", delay: 0.7 }}
+            className="mt-7 font-sans text-base md:text-lg text-white/50 font-light tracking-wide max-w-xs leading-relaxed"
+          >
+            The knowledge infrastructure for Africa's energy transition.
+          </motion.p>
         </div>
 
         {/* Scroll pulse */}

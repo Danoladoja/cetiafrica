@@ -15,27 +15,27 @@ export function Logo() {
   );
 }
 
-/** Monochrome white variant — for dark/transparent nav backgrounds */
+/** Monochrome white variant — original 4-square mark, all white, for dark backgrounds */
 export function LogoWhite() {
   return (
     <div className="flex items-center gap-3">
-      <div className="flex gap-[3px]">
+      <div className="flex gap-[2px]">
         {['C', 'E', 'T', 'I'].map((letter) => (
           <div
             key={letter}
-            className="w-7 h-7 flex items-center justify-center border border-white/80"
+            className="w-7 h-7 flex items-center justify-center bg-white"
           >
-            <span className="font-sans font-bold text-xs text-white leading-none">
+            <span className="font-sans font-bold text-xs text-[#0D1117] leading-none">
               {letter}
             </span>
           </div>
         ))}
       </div>
       <div className="flex flex-col justify-center leading-[1.2]">
-        <span className="font-sans font-medium text-[9px] tracking-[0.18em] uppercase text-white/80">
+        <span className="font-sans font-medium text-[9px] tracking-[0.18em] uppercase text-white/70">
           Climate and Energy
         </span>
-        <span className="font-sans font-medium text-[9px] tracking-[0.18em] uppercase text-white/80">
+        <span className="font-sans font-medium text-[9px] tracking-[0.18em] uppercase text-white/70">
           Transition Initiative
         </span>
       </div>
