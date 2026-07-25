@@ -83,11 +83,7 @@ export default function Home() {
           className="absolute inset-0 z-10 flex flex-col items-center justify-center text-center px-6"
           style={{ y: heroTextY, scale: heroTextScale, opacity: heroTextOpacity }}
         >
-          <span className="font-sans text-xs tracking-[0.35em] uppercase text-ceti-orange font-semibold mb-7 block">
-            We Are Building
-          </span>
-
-          <h1 className="font-serif text-[clamp(3rem,7.5vw,108px)] leading-[0.92] text-white tracking-tight">
+          <h1 className="font-serif text-[clamp(4rem,10vw,148px)] leading-[0.88] text-white tracking-tight font-bold">
             The Knowledge<br />Infrastructure
           </h1>
 
