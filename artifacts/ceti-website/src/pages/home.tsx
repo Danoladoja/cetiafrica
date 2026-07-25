@@ -72,6 +72,8 @@ export default function Home() {
             src={heroBg}
             alt=""
             className="w-full h-full object-cover scale-110"
+            fetchPriority="high"
+            decoding="async"
             style={{ filter: "brightness(0.22) saturate(0.5)" }}
           />
           <div className="absolute inset-x-0 top-0 h-48 bg-gradient-to-b from-[#0D1117] to-transparent" />
