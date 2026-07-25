@@ -1,5 +1,5 @@
 import { Link } from "wouter";
-import cetiColorLogo from "@assets/ChatGPT_Image_Jul_25,_2026,_01_09_19_AM_1784938197678.png";
+import cetiColorLogo from "@assets/ChatGPT_Image_Jul_25,_2026,_11_21_07_AM_1784976167970.png";
 
 export default function Footer() {
   return (
