@@ -80,10 +80,10 @@ export default function Home() {
 
         {/* Hero text — centred + scroll-driven exit */}
         <motion.div
-          className="absolute inset-0 z-10 flex flex-col items-center justify-end text-center px-6 pb-[18vh]"
+          className="absolute inset-0 z-10 flex flex-col items-center justify-center text-center px-6"
           style={{ y: heroTextY, scale: heroTextScale, opacity: heroTextOpacity }}
         >
-          <h1 className="font-serif text-[clamp(2.8rem,10vw,138px)] leading-[0.9] text-white tracking-tight font-bold">
+          <h1 className="font-serif text-[clamp(3rem,11vw,152px)] leading-[0.9] text-white tracking-tight font-bold">
             The Knowledge<br />Infrastructure
           </h1>
 
