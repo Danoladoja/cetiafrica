@@ -46,14 +46,16 @@ function StatPill({ value, label, color }: { value: string; label: string; color
 /* ─── Home ──────────────────────────────────────────────────── */
 export default function Home() {
   const heroRef = useRef<HTMLElement>(null);
+
+  // Track window scroll — App root div is min-h-[100dvh] with no overflow lock
   const { scrollY } = useScroll();
 
   // Parallax on bg image
   const heroY = useTransform(scrollY, [0, 900], [0, 200]);
 
   // Scroll-driven transforms for the centred hero text
-  const heroTextY     = useTransform(scrollY, [0, 600], [0, -120]);
-  const heroTextScale = useTransform(scrollY, [0, 600], [1, 0.78]);
+  const heroTextY       = useTransform(scrollY, [0, 600], [0, -120]);
+  const heroTextScale   = useTransform(scrollY, [0, 600], [1, 0.78]);
   const heroTextOpacity = useTransform(scrollY, [0, 400], [1, 0]);
 
   const [activeProgram, setActiveProgram] = useState(0);
@@ -64,75 +66,45 @@ export default function Home() {
       {/* ══ 01 · HERO ═══════════════════════════════════════════ */}
       <section ref={heroRef} className="relative w-full h-[100dvh] overflow-hidden">
 
-        {/* Parallax image */}
+        {/* Background image — strongly darkened so text is always vivid */}
         <motion.div className="absolute inset-0 z-0" style={{ y: heroY }}>
-          <img src={heroBg} alt="" className="w-full h-full object-cover scale-110" />
-          {/* Moderate base scrim — keeps image alive */}
-          <div className="absolute inset-0 bg-[#0D1117]/50" />
-          {/* Soft vignette darkens edges, not centre */}
-          <div className="absolute inset-0" style={{ background: "radial-gradient(ellipse 110% 100% at 50% 50%, transparent 20%, rgba(13,17,23,0.55) 100%)" }} />
-          {/* Top fade */}
-          <div className="absolute inset-x-0 top-0 h-52 bg-gradient-to-b from-[#0D1117] to-transparent" />
-          {/* Bottom fade */}
-          <div className="absolute inset-x-0 bottom-0 h-40 bg-gradient-to-t from-[#0D1117] to-transparent" />
+          <img
+            src={heroBg}
+            alt=""
+            className="w-full h-full object-cover scale-110"
+            style={{ filter: "brightness(0.22) saturate(0.5)" }}
+          />
+          <div className="absolute inset-x-0 top-0 h-48 bg-gradient-to-b from-[#0D1117] to-transparent" />
+          <div className="absolute inset-x-0 bottom-0 h-48 bg-gradient-to-t from-[#0D1117] to-transparent" />
         </motion.div>
 
-        {/* Headline — centred, scroll-animated */}
+        {/* Hero text — centred + scroll-driven exit */}
         <motion.div
           className="absolute inset-0 z-10 flex flex-col items-center justify-center text-center px-6"
           style={{ y: heroTextY, scale: heroTextScale, opacity: heroTextOpacity }}
         >
-          {/* Targeted scrim behind text block only */}
-          <div className="absolute inset-x-0 top-1/2 -translate-y-1/2 h-[65%]" style={{ background: "linear-gradient(to bottom, transparent, rgba(13,17,23,0.7) 20%, rgba(13,17,23,0.8) 50%, rgba(13,17,23,0.7) 80%, transparent)" }} />
-          {/* Eyebrow */}
-          <motion.span
-            initial={{ opacity: 0, y: 10 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, ease: "easeOut", delay: 0.1 }}
-            className="font-sans text-sm tracking-[0.25em] uppercase text-white font-light mb-7 block"
-            style={{ textShadow: "0 1px 20px rgba(0,0,0,1), 0 0 60px rgba(0,0,0,0.9)" }}
-          >
+          <span className="font-sans text-xs tracking-[0.35em] uppercase text-ceti-orange font-semibold mb-7 block">
             We Are Building
-          </motion.span>
+          </span>
 
-          <motion.h1
-            initial={{ opacity: 0, y: 44 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 1.15, ease: [0.16, 1, 0.3, 1], delay: 0.22 }}
-            className="font-serif text-[clamp(3.4rem,9vw,130px)] leading-[0.9] text-white tracking-tight max-w-[14ch]"
-            style={{ textShadow: "0 2px 40px rgba(0,0,0,0.9), 0 0 80px rgba(0,0,0,0.7)" }}
-          >
+          <h1 className="font-serif text-[clamp(3rem,7.5vw,108px)] leading-[0.92] text-white tracking-tight">
             The Knowledge<br />Infrastructure
-          </motion.h1>
+          </h1>
 
-          {/* Rule + subtitle */}
-          <motion.div
-            initial={{ opacity: 0, y: 14 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.9, ease: "easeOut", delay: 0.75 }}
-            className="mt-8 flex items-center gap-4"
-          >
-            <span className="block w-8 h-px bg-ceti-orange shrink-0" />
-            <p className="font-sans text-base md:text-lg text-white font-light tracking-[0.08em]" style={{ textShadow: "0 1px 20px rgba(0,0,0,1), 0 0 60px rgba(0,0,0,0.9)" }}>
-              For Africa's Energy Future
-            </p>
-            <span className="block w-8 h-px bg-ceti-orange shrink-0" />
-          </motion.div>
+          <p className="mt-7 font-sans text-lg md:text-xl text-white/90 font-normal tracking-[0.2em] uppercase">
+            For Africa's Energy Future
+          </p>
         </motion.div>
 
-        {/* Scroll line */}
-        <motion.div
-          initial={{ opacity: 0 }} animate={{ opacity: 1 }}
-          transition={{ delay: 1.6 }}
-          className="absolute bottom-10 left-1/2 -translate-x-1/2 z-10 flex flex-col items-center gap-2"
-        >
-          <span className="font-sans text-[9px] tracking-[0.3em] uppercase text-white/30">Scroll</span>
+        {/* Scroll cue */}
+        <div className="absolute bottom-10 left-1/2 -translate-x-1/2 z-10 flex flex-col items-center gap-2">
+          <span className="font-sans text-[9px] tracking-[0.3em] uppercase text-white/40">Scroll</span>
           <motion.div
-            animate={{ y: [0, 9, 0], opacity: [0.25, 0.7, 0.25] }}
-            transition={{ duration: 2.4, repeat: Infinity, ease: "easeInOut" }}
-            className="w-px h-10 bg-white/25"
+            animate={{ y: [0, 8, 0], opacity: [0.3, 0.8, 0.3] }}
+            transition={{ duration: 2.2, repeat: Infinity, ease: "easeInOut" }}
+            className="w-px h-10 bg-white/40"
           />
-        </motion.div>
+        </div>
       </section>
 
       {/* ══ 02 · STATEMENT ══════════════════════════════════════ */}
