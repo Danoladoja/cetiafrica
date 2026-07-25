@@ -1,8 +1,13 @@
-import { motion } from "framer-motion";
+import { motion, useScroll, useTransform } from "framer-motion";
+import { useRef } from "react";
 
 export default function About() {
+  const containerRef = useRef<HTMLDivElement>(null);
+  const { scrollYProgress } = useScroll({ target: containerRef, offset: ["start start", "end start"] });
+  const headingColor = useTransform(scrollYProgress, [0, 0.35], ["#FFFFFF", "#E8551A"]);
+
   return (
-    <div className="bg-[#0D1117] min-h-screen w-full text-ceti-cream">
+    <div ref={containerRef} className="bg-[#0D1117] min-h-screen w-full text-ceti-cream">
 
       {/* ── Hero statement ── */}
       <section className="px-8 md:px-14 pt-40 md:pt-52 pb-20 md:pb-28 max-w-[1400px] mx-auto">
@@ -10,7 +15,8 @@ export default function About() {
           initial={{ opacity: 0, y: 32 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 1, ease: [0.16, 1, 0.3, 1] }}
-          className="font-serif text-[clamp(2.8rem,7vw,7rem)] leading-[0.95] tracking-tight text-white mb-14 max-w-[16ch]"
+          style={{ color: headingColor }}
+          className="font-serif text-[clamp(2.8rem,7vw,7rem)] leading-[0.95] tracking-tight mb-14 max-w-[16ch]"
         >
           We are Africa's Knowledge Infrastructure for Energy
         </motion.h1>
