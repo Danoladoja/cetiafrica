@@ -1,12 +1,34 @@
-import { motion, useScroll, useTransform } from "framer-motion";
+import { motion, useScroll, useTransform, AnimatePresence } from "framer-motion";
 import { Link } from "wouter";
+import { useState } from "react";
 import heroBg from "@assets/pexels-silveremeya-7381784_1784969949348.jpg";
 
 /* ─── Programs data ────────────────────────────────────────── */
 const programs = [
-  { number: "01", name: "Africa Energy Pulse",    tag: "Journalism",              color: "#2AA89C", href: "/programs" },
-  { number: "02", name: "AfriEnergy Tracker",     tag: "Market Intelligence",     color: "#E8551A", href: "/programs" },
-  { number: "03", name: "AfriEnergy Comms Lab",   tag: "Strategic Communications",color: "#F6A820", href: "/programs" },
+  {
+    number: "01",
+    name: "Africa Energy Pulse",
+    tag: "Journalism",
+    color: "#2AA89C",
+    href: "/programs",
+    description: "Pan-African energy journalism tracking the continent's power transition through data-driven reporting, investigative features, and sharp editorial analysis.",
+  },
+  {
+    number: "02",
+    name: "AfriEnergy Tracker",
+    tag: "Market Intelligence",
+    color: "#E8551A",
+    href: "/programs",
+    description: "A real-time intelligence platform mapping Africa's energy investments, project pipelines, and regulatory shifts across 54 countries.",
+  },
+  {
+    number: "03",
+    name: "AfriEnergy Comms Lab",
+    tag: "Strategic Communications",
+    color: "#F6A820",
+    href: "/programs",
+    description: "Strategic communications support for clean energy actors — building narratives, strengthening advocacy, and amplifying Africa's transition story.",
+  },
 ];
 
 /* ─── Inline stat pill ──────────────────────────────────────── */
@@ -25,6 +47,7 @@ function StatPill({ value, label, color }: { value: string; label: string; color
 export default function Home() {
   const { scrollY } = useScroll();
   const heroY = useTransform(scrollY, [0, 900], [0, 200]);
+  const [activeProgram, setActiveProgram] = useState(0);
 
   return (
     <div className="bg-[#0D1117] w-full overflow-x-hidden">
@@ -173,50 +196,123 @@ export default function Home() {
           Our Programs
         </motion.p>
 
-        <div className="grid grid-cols-1 md:grid-cols-3 divide-y md:divide-y-0 md:divide-x divide-white/10 border border-white/10">
-          {programs.map((p, i) => (
-            <motion.div
-              key={p.number}
-              initial={{ opacity: 0, y: 28 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true, margin: "-8%" }}
-              transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1], delay: i * 0.1 }}
-              style={{ borderTop: `3px solid ${p.color}` }}
-            >
-              <Link
-                href={p.href}
-                className="group flex flex-col p-10 md:p-12 h-full transition-all duration-300 hover:bg-white/[0.05] block"
+        {/* Horizontal accordion */}
+        <motion.div
+          initial={{ opacity: 0, y: 32 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, margin: "-6%" }}
+          transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
+          className="flex h-[520px] border border-white/10 overflow-hidden"
+        >
+          {programs.map((p, i) => {
+            const isActive = activeProgram === i;
+            return (
+              <motion.div
+                key={p.number}
+                onMouseEnter={() => setActiveProgram(i)}
+                className="relative overflow-hidden cursor-pointer flex-shrink-0 border-r border-white/10 last:border-r-0"
+                animate={{ flexGrow: isActive ? 4 : 1 }}
+                transition={{ duration: 0.55, ease: [0.16, 1, 0.3, 1] }}
+                style={{ borderTop: `3px solid ${p.color}`, minWidth: 72 }}
               >
-                {/* Number */}
-                <span
-                  className="font-sans text-[3.5rem] font-black leading-none tabular-nums opacity-80 transition-opacity duration-300 group-hover:opacity-100 mb-6"
+                {/* Brand gradient fill */}
+                <motion.div
+                  className="absolute inset-0 pointer-events-none"
+                  animate={{ opacity: isActive ? 1 : 0 }}
+                  transition={{ duration: 0.45 }}
+                  style={{ background: `linear-gradient(135deg, ${p.color}22 0%, ${p.color}08 45%, transparent 75%)` }}
+                />
+
+                {/* Watermark number — strengthens when active */}
+                <motion.span
+                  className="absolute bottom-6 right-4 font-serif font-extrabold leading-none select-none tabular-nums pointer-events-none"
+                  animate={{
+                    fontSize: isActive ? "10rem" : "4rem",
+                    opacity: isActive ? 0.2 : 0.08,
+                  }}
+                  transition={{ duration: 0.55, ease: [0.16, 1, 0.3, 1] }}
                   style={{ color: p.color }}
                 >
                   {p.number}
-                </span>
+                </motion.span>
 
-                {/* Name + tag — grouped, grows to fill space */}
-                <div className="flex flex-col gap-3 flex-1 mb-8">
-                  <h2 className="font-serif text-[clamp(1.8rem,2.6vw,3rem)] text-white leading-[1.05] tracking-tight">
-                    {p.name}
-                  </h2>
-                  <span className="font-sans text-xs tracking-[0.22em] uppercase text-white/45">{p.tag}</span>
-                </div>
+                {/* Collapsed label — vertical */}
+                <AnimatePresence>
+                  {!isActive && (
+                    <motion.div
+                      initial={{ opacity: 0 }}
+                      animate={{ opacity: 1 }}
+                      exit={{ opacity: 0 }}
+                      transition={{ duration: 0.2 }}
+                      className="absolute inset-0 flex flex-col items-center justify-center gap-6 px-2"
+                    >
+                      <span
+                        className="font-sans text-[10px] tracking-[0.25em] uppercase font-medium whitespace-nowrap"
+                        style={{
+                          color: p.color,
+                          writingMode: "vertical-rl",
+                          transform: "rotate(180deg)",
+                        }}
+                      >
+                        {p.name}
+                      </span>
+                    </motion.div>
+                  )}
+                </AnimatePresence>
 
-                {/* Divider */}
-                <div className="h-px w-full mb-6" style={{ backgroundColor: `${p.color}40` }} />
+                {/* Expanded content */}
+                <AnimatePresence>
+                  {isActive && (
+                    <motion.div
+                      initial={{ opacity: 0, y: 20 }}
+                      animate={{ opacity: 1, y: 0 }}
+                      exit={{ opacity: 0, y: 10 }}
+                      transition={{ duration: 0.4, ease: "easeOut", delay: 0.12 }}
+                      className="absolute inset-0 flex flex-col justify-end p-10 md:p-12"
+                    >
+                      {/* Tag */}
+                      <span
+                        className="font-sans text-[10px] tracking-[0.3em] uppercase font-medium mb-4"
+                        style={{ color: p.color }}
+                      >
+                        {p.tag}
+                      </span>
 
-                {/* Explore capsule — full bottom row */}
-                <div>
-                  <span
-                    className="font-sans text-[11px] font-semibold tracking-[0.18em] uppercase px-4 py-1.5 rounded-full border transition-all duration-300 group-hover:text-white"
-                    style={{ color: p.color, borderColor: `${p.color}60`, backgroundColor: `${p.color}12` }}
-                  >Explore</span>
-                </div>
-              </Link>
-            </motion.div>
-          ))}
-        </div>
+                      {/* Program name */}
+                      <h2 className="font-serif text-[clamp(2rem,3.2vw,3.2rem)] text-white leading-[1.05] tracking-tight mb-5">
+                        {p.name}
+                      </h2>
+
+                      {/* Description */}
+                      <p className="font-sans text-sm text-white/55 leading-relaxed mb-8 max-w-sm">
+                        {p.description}
+                      </p>
+
+                      {/* Divider */}
+                      <div className="h-px w-12 mb-8" style={{ backgroundColor: p.color }} />
+
+                      {/* CTA pill */}
+                      <div>
+                        <Link href={p.href}>
+                          <span
+                            className="inline-block font-sans text-[11px] font-semibold tracking-[0.18em] uppercase px-5 py-2 rounded-full border transition-colors duration-200"
+                            style={{
+                              color: p.color,
+                              borderColor: `${p.color}70`,
+                              backgroundColor: `${p.color}15`,
+                            }}
+                          >
+                            Explore Program
+                          </span>
+                        </Link>
+                      </div>
+                    </motion.div>
+                  )}
+                </AnimatePresence>
+              </motion.div>
+            );
+          })}
+        </motion.div>
       </section>
 
       {/* ══ 04 · MARQUEE ════════════════════════════════════════ */}
