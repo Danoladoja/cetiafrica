@@ -195,9 +195,9 @@ export default function Home() {
                 <div className="flex items-center justify-between">
                   <span className="font-sans text-xs tracking-[0.22em] uppercase text-white/50">{p.tag}</span>
                   <span
-                    className="font-sans text-sm font-bold tracking-[0.15em] transition-transform duration-300 group-hover:translate-x-1.5 inline-block"
-                    style={{ color: p.color }}
-                  >→</span>
+                    className="font-sans text-[11px] font-semibold tracking-[0.18em] uppercase px-4 py-1.5 rounded-full border transition-all duration-300 group-hover:text-white"
+                    style={{ color: p.color, borderColor: `${p.color}60`, backgroundColor: `${p.color}12` }}
+                  >Explore</span>
                 </div>
               </Link>
             </motion.div>
