@@ -4,7 +4,7 @@ import cetiColorLogo from "@assets/ChatGPT_Image_Jul_25,_2026,_01_09_19_AM_17849
 export default function Footer() {
   return (
     <footer className="bg-[#0D1117] text-ceti-cream py-14 px-8 md:px-14 mt-auto border-t border-white/8">
-      <div className="flex flex-col md:flex-row justify-between items-start md:items-end gap-10">
+      <div className="flex flex-col md:flex-row justify-between items-center gap-10">
 
         {/* Left column — nav + copyright */}
         <div className="flex flex-col items-start gap-6">
