@@ -35,8 +35,13 @@ export default function Home() {
         {/* Parallax image */}
         <motion.div className="absolute inset-0 z-0" style={{ y: heroY }}>
           <img src={heroBg} alt="" className="w-full h-full object-cover scale-110" />
-          <div className="absolute inset-0 bg-[#0D1117]/55" />
-          <div className="absolute inset-x-0 top-0 h-52 bg-gradient-to-b from-[#0D1117]/70 to-transparent" />
+          {/* Base dark overlay */}
+          <div className="absolute inset-0 bg-[#0D1117]/65" />
+          {/* Left vignette — darkens the text column */}
+          <div className="absolute inset-y-0 left-0 w-2/3 bg-gradient-to-r from-[#0D1117]/70 to-transparent" />
+          {/* Top fade */}
+          <div className="absolute inset-x-0 top-0 h-52 bg-gradient-to-b from-[#0D1117]/80 to-transparent" />
+          {/* Bottom fade */}
           <div className="absolute inset-x-0 bottom-0 h-40 bg-gradient-to-t from-[#0D1117] to-transparent" />
         </motion.div>
 
