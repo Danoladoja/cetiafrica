@@ -29,19 +29,19 @@ export default function Navbar() {
         transparent ? "bg-transparent text-ceti-cream" : "bg-ceti-dark text-ceti-cream"
       }`}
     >
-      {/* No padding on container — padding lives on each child so both sides are exactly equal */}
-      <div className="flex items-center justify-between">
+      {/* Container padding controls both sides equally */}
+      <div className="flex items-center justify-between px-4 md:px-12">
 
-        {/* Logo — pl-5 on mobile, pl-12 on desktop */}
+        {/* Logo */}
         <Link
           href="/"
-          className="pl-5 md:pl-12 z-50 focus:outline-none flex items-center h-20 md:h-24 overflow-hidden shrink-0"
+          className="z-50 focus:outline-none flex items-center h-20 md:h-24 overflow-hidden shrink-0"
         >
           <LogoWhite />
         </Link>
 
-        {/* Desktop Nav — pr-12 mirrors logo's pl-12 */}
-        <nav className="hidden md:flex items-center gap-10 pr-12 font-sans font-medium tracking-wide text-sm uppercase">
+        {/* Desktop Nav */}
+        <nav className="hidden md:flex items-center gap-10 font-sans font-medium tracking-wide text-sm uppercase">
           {navLinks.map((link) => (
             <Link key={link.href} href={link.href} className="relative group py-2">
               {link.label}
@@ -53,9 +53,9 @@ export default function Navbar() {
           </Link>
         </nav>
 
-        {/* Mobile Toggle — pr-5 mirrors logo's pl-5 exactly */}
+        {/* Mobile Toggle */}
         <button
-          className="md:hidden z-50 pr-5 pl-3 flex items-center h-20"
+          className="md:hidden z-50 flex items-center h-20"
           onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
           aria-label="Toggle menu"
         >
