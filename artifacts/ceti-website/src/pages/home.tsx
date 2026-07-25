@@ -1,6 +1,6 @@
 import { motion, useScroll, useTransform } from "framer-motion";
 import { Link } from "wouter";
-import heroBg from "@assets/generated_images/hero-bg-v5.jpg";
+import heroBg from "@assets/pexels-silveremeya-7381784_1784969949348.jpg";
 
 /* ─── Programs data ────────────────────────────────────────── */
 const programs = [
