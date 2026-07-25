@@ -20,7 +20,6 @@ export default function Navbar() {
   const navLinks = [
     { href: "/about", label: "About" },
     { href: "/programs", label: "Programs" },
-    { href: "/contact", label: "Contact" },
   ];
 
   // We only want transparent nav on Home page when not scrolled
