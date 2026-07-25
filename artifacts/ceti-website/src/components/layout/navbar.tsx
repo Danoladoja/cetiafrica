@@ -29,7 +29,7 @@ export default function Navbar() {
         transparent ? "bg-transparent text-ceti-cream" : "bg-ceti-dark text-ceti-cream"
       }`}
     >
-      <div className="flex items-center justify-between px-5 md:px-12">
+      <div className="flex items-center justify-between pl-4 pr-4 md:pl-12 md:pr-12">
         {/* Logo clipped to bar height — image overflows, centre (the mark) shows */}
         <Link href="/" className="z-50 focus:outline-none flex items-center h-20 md:h-24 overflow-hidden shrink-0">
           <LogoWhite />
@@ -55,9 +55,9 @@ export default function Navbar() {
           </Link>
         </nav>
 
-        {/* Mobile Toggle */}
+        {/* Mobile Toggle — same visual inset as logo via flex centering */}
         <button
-          className="md:hidden z-50 p-2 -mr-2"
+          className="md:hidden z-50 w-6 h-6 flex items-center justify-center"
           onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
         >
           {mobileMenuOpen ? <X size={24} /> : <Menu size={24} />}

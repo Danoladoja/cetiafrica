@@ -6,8 +6,8 @@ export default function Footer() {
     <footer className="bg-[#0D1117] text-ceti-cream py-10 md:py-14 px-8 md:px-14 mt-auto">
       <div className="flex flex-col md:flex-row justify-between items-center gap-8 md:gap-10">
 
-        {/* Logo — centred on mobile, right on desktop */}
-        <div className="order-first md:order-last opacity-90 hover:opacity-100 transition-opacity flex justify-center md:block">
+        {/* Logo — centred on mobile, vertically centred with nav on desktop */}
+        <div className="order-first md:order-last opacity-90 hover:opacity-100 transition-opacity flex justify-center md:flex md:items-center">
           <img
             src={cetiColorLogo}
             alt="CETI — Climate and Energy Transition Initiative"
