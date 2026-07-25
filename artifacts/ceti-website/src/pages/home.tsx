@@ -67,12 +67,12 @@ export default function Home() {
         {/* Parallax image */}
         <motion.div className="absolute inset-0 z-0" style={{ y: heroY }}>
           <img src={heroBg} alt="" className="w-full h-full object-cover scale-110" />
-          {/* Base dark overlay */}
-          <div className="absolute inset-0 bg-[#0D1117]/60" />
-          {/* Radial centre vignette — keeps image visible at edges */}
-          <div className="absolute inset-0" style={{ background: "radial-gradient(ellipse 80% 70% at 50% 50%, transparent 30%, #0D1117 100%)" }} />
+          {/* Moderate base scrim — keeps image alive */}
+          <div className="absolute inset-0 bg-[#0D1117]/50" />
+          {/* Soft vignette darkens edges, not centre */}
+          <div className="absolute inset-0" style={{ background: "radial-gradient(ellipse 110% 100% at 50% 50%, transparent 20%, rgba(13,17,23,0.55) 100%)" }} />
           {/* Top fade */}
-          <div className="absolute inset-x-0 top-0 h-52 bg-gradient-to-b from-[#0D1117]/80 to-transparent" />
+          <div className="absolute inset-x-0 top-0 h-52 bg-gradient-to-b from-[#0D1117] to-transparent" />
           {/* Bottom fade */}
           <div className="absolute inset-x-0 bottom-0 h-40 bg-gradient-to-t from-[#0D1117] to-transparent" />
         </motion.div>
@@ -82,12 +82,15 @@ export default function Home() {
           className="absolute inset-0 z-10 flex flex-col items-center justify-center text-center px-6"
           style={{ y: heroTextY, scale: heroTextScale, opacity: heroTextOpacity }}
         >
+          {/* Targeted scrim behind text block only */}
+          <div className="absolute inset-x-0 top-1/2 -translate-y-1/2 h-[65%]" style={{ background: "linear-gradient(to bottom, transparent, rgba(13,17,23,0.7) 20%, rgba(13,17,23,0.8) 50%, rgba(13,17,23,0.7) 80%, transparent)" }} />
           {/* Eyebrow */}
           <motion.span
             initial={{ opacity: 0, y: 10 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, ease: "easeOut", delay: 0.1 }}
-            className="font-sans text-sm tracking-[0.25em] uppercase text-white/60 font-light mb-7 block"
+            className="font-sans text-sm tracking-[0.25em] uppercase text-white font-light mb-7 block"
+            style={{ textShadow: "0 1px 20px rgba(0,0,0,1), 0 0 60px rgba(0,0,0,0.9)" }}
           >
             We Are Building
           </motion.span>
@@ -97,6 +100,7 @@ export default function Home() {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 1.15, ease: [0.16, 1, 0.3, 1], delay: 0.22 }}
             className="font-serif text-[clamp(3.4rem,9vw,130px)] leading-[0.9] text-white tracking-tight max-w-[14ch]"
+            style={{ textShadow: "0 2px 40px rgba(0,0,0,0.9), 0 0 80px rgba(0,0,0,0.7)" }}
           >
             The Knowledge<br />Infrastructure
           </motion.h1>
@@ -109,7 +113,7 @@ export default function Home() {
             className="mt-8 flex items-center gap-4"
           >
             <span className="block w-8 h-px bg-ceti-orange shrink-0" />
-            <p className="font-sans text-base md:text-lg text-white/70 font-light tracking-[0.08em]">
+            <p className="font-sans text-base md:text-lg text-white font-light tracking-[0.08em]" style={{ textShadow: "0 1px 20px rgba(0,0,0,1), 0 0 60px rgba(0,0,0,0.9)" }}>
               For Africa's Energy Future
             </p>
             <span className="block w-8 h-px bg-ceti-orange shrink-0" />
