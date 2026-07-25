@@ -54,7 +54,7 @@ export default function Navbar() {
             href="/contact"
             className="text-ceti-teal hover:text-ceti-cream transition-colors duration-300"
           >
-            Partner with us →
+            Partner with us
           </Link>
         </nav>
 
@@ -92,7 +92,7 @@ export default function Navbar() {
                 onClick={() => setMobileMenuOpen(false)}
                 className="text-ceti-teal hover:text-ceti-cream transition-colors mt-8"
               >
-                Partner with us →
+                Partner with us
               </Link>
             </nav>
           </motion.div>
