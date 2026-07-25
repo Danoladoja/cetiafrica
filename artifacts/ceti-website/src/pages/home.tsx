@@ -141,7 +141,7 @@ export default function Home() {
                   key={i}
                   className={`flex flex-col gap-2 pt-6 pb-2 ${i > 0 ? "pl-6 border-l border-white/10" : ""}`}
                 >
-                  <span className="font-serif text-[clamp(2rem,4vw,3.5rem)] leading-none font-extrabold" style={{ color: s.color }}>
+                  <span className="font-serif text-[clamp(2rem,4vw,3.5rem)] leading-none" style={{ color: s.color }}>
                     {s.value}
                   </span>
                   <span className="font-sans text-[11px] tracking-[0.18em] uppercase text-white/35 leading-snug">
