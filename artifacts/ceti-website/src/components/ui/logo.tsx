@@ -5,7 +5,7 @@ export function Logo() {
     <img
       src={logoMark}
       alt="CETI — Climate and Energy Transition Initiative"
-      className="h-12 w-auto"
+      className="h-20 w-auto"
     />
   );
 }
@@ -15,7 +15,7 @@ export function LogoWhite() {
     <img
       src={logoMark}
       alt="CETI — Climate and Energy Transition Initiative"
-      className="h-12 w-auto"
+      className="h-20 w-auto"
       style={{ filter: "invert(1)" }}
     />
   );
