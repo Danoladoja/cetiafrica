@@ -27,7 +27,7 @@ const programs = [
     tag: "Strategic Communications",
     color: "#F6A820",
     href: "/programs",
-    description: "Strategic communications support for clean energy actors — building narratives, strengthening advocacy, and amplifying Africa's transition story.",
+    description: "Strategic communications support for clean energy actors: building narratives, strengthening advocacy, and amplifying Africa's transition story.",
   },
 ];
 
@@ -136,7 +136,7 @@ export default function Home() {
               600M
             </span>
             <span className="font-sans text-sm tracking-[0.14em] text-white/60 leading-relaxed max-w-[18ch]">
-              Africans without reliable electricity — today
+              Africans without reliable electricity, today
             </span>
           </motion.div>
 
