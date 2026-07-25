@@ -1,23 +1,172 @@
-import { motion, useScroll, useTransform } from "framer-motion";
+import { motion, useScroll, useTransform, AnimatePresence } from "framer-motion";
 import { Link } from "wouter";
+import { useState } from "react";
 import heroBg from "@assets/generated_images/hero-bg-v5.jpg";
 
 /* ─── Programs data ────────────────────────────────────────── */
 const programs = [
-  { number: "01", name: "Africa Energy Pulse",    tag: "Journalism",              color: "#2AA89C", href: "/programs" },
-  { number: "02", name: "AfriEnergy Tracker",     tag: "Market Intelligence",     color: "#E8551A", href: "/programs" },
-  { number: "03", name: "AfriEnergy Comms Lab",   tag: "Strategic Communications",color: "#F6A820", href: "/programs" },
+  {
+    number: "01",
+    name: "Africa Energy Pulse",
+    tag: "Journalism",
+    color: "#2AA89C",
+    href: "/programs",
+    description: "Authoritative journalism covering Africa's energy transition — policy shifts, project finance, grid access, and the communities powering change.",
+    stat: "54", statLabel: "Countries covered",
+  },
+  {
+    number: "02",
+    name: "AfriEnergy Tracker",
+    tag: "Market Intelligence",
+    color: "#E8551A",
+    href: "/programs",
+    description: "Real-time data and analysis on Africa's energy markets, investment flows, and project pipelines — turning raw data into strategic insight.",
+    stat: "3×", statLabel: "Power demand by 2040",
+  },
+  {
+    number: "03",
+    name: "AfriEnergy Comms Lab",
+    tag: "Strategic Communications",
+    color: "#F6A820",
+    href: "/programs",
+    description: "Building the communications capacity of African energy advocates and institutions to shape their own narrative on the global stage.",
+    stat: "60%", statLabel: "Global solar irradiance",
+  },
 ];
 
-/* ─── Inline stat pill ──────────────────────────────────────── */
-function StatPill({ value, label, color }: { value: string; label: string; color: string }) {
+/* ─── Programs accordion ────────────────────────────────────── */
+function ProgramsSection() {
+  const [active, setActive] = useState(0);
+
   return (
-    <div className="flex flex-col gap-2">
-      <span className="font-serif text-[clamp(2.4rem,5vw,5rem)] leading-none font-extrabold" style={{ color }}>
-        {value}
-      </span>
-      <span className="font-sans text-sm tracking-[0.2em] uppercase text-white/40">{label}</span>
-    </div>
+    <section className="w-full px-8 md:px-14 pt-20 pb-24">
+      <motion.p
+        initial={{ opacity: 0 }}
+        whileInView={{ opacity: 1 }}
+        viewport={{ once: true }}
+        transition={{ duration: 0.6 }}
+        className="font-sans text-[10px] tracking-[0.35em] uppercase text-white/45 mb-14"
+      >
+        Our Programs
+      </motion.p>
+
+      {/* Accordion grid — equal on mobile, flex-grow on desktop */}
+      <div
+        className="flex flex-col md:flex-row border border-white/10 overflow-hidden"
+        style={{ minHeight: 480 }}
+      >
+        {programs.map((p, i) => {
+          const isActive = active === i;
+          return (
+            <motion.div
+              key={p.number}
+              className="relative flex flex-col cursor-pointer overflow-hidden border-b md:border-b-0 md:border-r border-white/10 last:border-0"
+              animate={{ flex: isActive ? 2.2 : 1 }}
+              transition={{ duration: 0.55, ease: [0.16, 1, 0.3, 1] }}
+              onMouseEnter={() => setActive(i)}
+            >
+              {/* Coloured fill — fades in when active */}
+              <motion.div
+                className="absolute inset-0"
+                animate={{ opacity: isActive ? 1 : 0 }}
+                transition={{ duration: 0.4 }}
+                style={{ background: `linear-gradient(135deg, ${p.color}22 0%, ${p.color}08 100%)` }}
+              />
+
+              {/* Top accent bar */}
+              <div className="h-[3px] w-full shrink-0" style={{ backgroundColor: p.color }} />
+
+              {/* Large decorative number — watermark behind content */}
+              <div
+                className="absolute right-[-0.5rem] bottom-[-1rem] font-serif leading-none font-extrabold select-none pointer-events-none transition-opacity duration-500"
+                style={{
+                  fontSize: "clamp(7rem, 18vw, 14rem)",
+                  color: `${p.color}${isActive ? "18" : "0a"}`,
+                }}
+              >
+                {p.number}
+              </div>
+
+              {/* Card content */}
+              <div className="relative z-10 flex flex-col h-full p-10 md:p-12">
+
+                {/* Tag — always visible at top */}
+                <span
+                  className="font-sans text-[10px] tracking-[0.32em] uppercase font-medium"
+                  style={{ color: p.color }}
+                >
+                  {p.tag}
+                </span>
+
+                {/* Spacer pushes name to bottom-left of upper area */}
+                <div className="flex-1 flex flex-col justify-end mt-8 gap-4">
+
+                  {/* Stat — visible only when active */}
+                  <AnimatePresence>
+                    {isActive && (
+                      <motion.div
+                        initial={{ opacity: 0, y: 10 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        exit={{ opacity: 0, y: 6 }}
+                        transition={{ duration: 0.35 }}
+                        className="flex flex-col gap-1"
+                      >
+                        <span
+                          className="font-serif text-[clamp(2.4rem,4vw,4.5rem)] leading-none font-extrabold tabular-nums"
+                          style={{ color: p.color }}
+                        >
+                          {p.stat}
+                        </span>
+                        <span className="font-sans text-[11px] tracking-[0.2em] uppercase text-white/45">
+                          {p.statLabel}
+                        </span>
+                      </motion.div>
+                    )}
+                  </AnimatePresence>
+
+                  {/* Program name — always visible */}
+                  <h2
+                    className="font-serif text-white leading-[1.05] tracking-tight transition-all duration-500"
+                    style={{ fontSize: isActive ? "clamp(1.9rem,2.8vw,3.2rem)" : "clamp(1.4rem,2vw,2.2rem)" }}
+                  >
+                    {p.name}
+                  </h2>
+                </div>
+
+                {/* Description + CTA — slide in when active */}
+                <AnimatePresence>
+                  {isActive && (
+                    <motion.div
+                      initial={{ opacity: 0, y: 14 }}
+                      animate={{ opacity: 1, y: 0 }}
+                      exit={{ opacity: 0, y: 8 }}
+                      transition={{ duration: 0.4, delay: 0.08 }}
+                      className="mt-6 flex flex-col gap-8"
+                    >
+                      {/* Divider */}
+                      <div className="h-px w-full" style={{ backgroundColor: `${p.color}40` }} />
+
+                      <p className="font-sans text-sm text-white/60 leading-relaxed max-w-[38ch]">
+                        {p.description}
+                      </p>
+
+                      <Link href={p.href}>
+                        <span
+                          className="inline-block font-sans text-[11px] font-semibold tracking-[0.22em] uppercase px-5 py-2 rounded-full border transition-all duration-300 hover:bg-white/10"
+                          style={{ color: p.color, borderColor: `${p.color}70` }}
+                        >
+                          Explore Program
+                        </span>
+                      </Link>
+                    </motion.div>
+                  )}
+                </AnimatePresence>
+              </div>
+            </motion.div>
+          );
+        })}
+      </div>
+    </section>
   );
 }
 
@@ -157,62 +306,7 @@ export default function Home() {
       </section>
 
       {/* ══ 03 · PROGRAMS ═══════════════════════════════════════ */}
-      <section className="w-full px-8 md:px-14 pt-20 pb-24">
-        <motion.p
-          initial={{ opacity: 0 }}
-          whileInView={{ opacity: 1 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.6 }}
-          className="font-sans text-[10px] tracking-[0.35em] uppercase text-white/45 mb-14"
-        >
-          Our Programs
-        </motion.p>
-
-        <div className="grid grid-cols-1 md:grid-cols-3 divide-y md:divide-y-0 md:divide-x divide-white/10 border border-white/10">
-          {programs.map((p, i) => (
-            <motion.div
-              key={p.number}
-              initial={{ opacity: 0, y: 28 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true, margin: "-8%" }}
-              transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1], delay: i * 0.1 }}
-              style={{ borderTop: `3px solid ${p.color}` }}
-            >
-              <Link
-                href={p.href}
-                className="group flex flex-col p-10 md:p-12 h-full transition-all duration-300 hover:bg-white/[0.05] block"
-              >
-                {/* Number */}
-                <span
-                  className="font-sans text-[3.5rem] font-black leading-none tabular-nums opacity-80 transition-opacity duration-300 group-hover:opacity-100 mb-6"
-                  style={{ color: p.color }}
-                >
-                  {p.number}
-                </span>
-
-                {/* Name + tag — grouped, grows to fill space */}
-                <div className="flex flex-col gap-3 flex-1 mb-8">
-                  <h2 className="font-serif text-[clamp(1.8rem,2.6vw,3rem)] text-white leading-[1.05] tracking-tight">
-                    {p.name}
-                  </h2>
-                  <span className="font-sans text-xs tracking-[0.22em] uppercase text-white/45">{p.tag}</span>
-                </div>
-
-                {/* Divider */}
-                <div className="h-px w-full mb-6" style={{ backgroundColor: `${p.color}40` }} />
-
-                {/* Explore capsule — full bottom row */}
-                <div>
-                  <span
-                    className="font-sans text-[11px] font-semibold tracking-[0.18em] uppercase px-4 py-1.5 rounded-full border transition-all duration-300 group-hover:text-white"
-                    style={{ color: p.color, borderColor: `${p.color}60`, backgroundColor: `${p.color}12` }}
-                  >Explore</span>
-                </div>
-              </Link>
-            </motion.div>
-          ))}
-        </div>
-      </section>
+      <ProgramsSection />
 
       {/* ══ 04 · MARQUEE ════════════════════════════════════════ */}
       <div className="w-full border-y border-white/10 overflow-hidden py-5 bg-[#0D1117]">
