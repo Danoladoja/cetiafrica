@@ -2,10 +2,9 @@ import { motion, useScroll, useTransform } from "framer-motion";
 import { Link } from "wouter";
 import { useState } from "react";
 import heroBg from "@assets/generated_images/hero-bg-v5.jpg";
-import pulseImg   from "@assets/programs/program-pulse.jpg";
-import trackerImg from "@assets/programs/program-tracker.jpg";
-import commsImg   from "@assets/programs/program-comms.jpg";
-// images live in attached_assets/programs/ (resolved via @assets alias)
+import pulseIcon   from "../assets/icons/icon-pulse.svg";
+import trackerIcon from "../assets/icons/icon-tracker.svg";
+import commsIcon   from "../assets/icons/icon-comms.svg";
 
 /* ─── Programs data ────────────────────────────────────────── */
 const programs = [
@@ -15,7 +14,7 @@ const programs = [
     tag: "Journalism",
     color: "#2AA89C",
     href: "/programs",
-    image: pulseImg,
+    icon: pulseIcon,
     description: "Authoritative journalism covering Africa's energy transition — policy shifts, project finance, grid access, and the communities powering change.",
   },
   {
@@ -24,7 +23,7 @@ const programs = [
     tag: "Market Intelligence",
     color: "#E8551A",
     href: "/programs",
-    image: trackerImg,
+    icon: trackerIcon,
     description: "Real-time data and analysis on Africa's energy markets, investment flows, and project pipelines — turning raw data into strategic insight.",
   },
   {
@@ -33,7 +32,7 @@ const programs = [
     tag: "Strategic Communications",
     color: "#F6A820",
     href: "/programs",
-    image: commsImg,
+    icon: commsIcon,
     description: "Building the communications capacity of African energy advocates and institutions to shape their own narrative on the global stage.",
   },
 ];
@@ -69,55 +68,48 @@ function ProgramsSection() {
               viewport={{ once: true, margin: "-8%" }}
               transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1], delay: i * 0.1 }}
             >
-              {/* Background image — fades out on hover */}
-              <motion.img
-                src={p.image}
-                alt={p.name}
-                className="absolute inset-0 w-full h-full object-cover"
-                animate={{ opacity: isHovered ? 0 : 1, scale: isHovered ? 1.04 : 1 }}
-                transition={{ duration: 0.5, ease: [0.16, 1, 0.3, 1] }}
-              />
-
-              {/* Base gradient over image — lifts bottom text */}
-              <motion.div
-                className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/30 to-black/10"
-                animate={{ opacity: isHovered ? 0 : 1 }}
-                transition={{ duration: 0.4 }}
-              />
-
-              {/* Hover background — solid dark with brand colour tint */}
-              <motion.div
+              {/* Card background — always dark with brand radial glow */}
+              <div
                 className="absolute inset-0"
-                animate={{ opacity: isHovered ? 1 : 0 }}
-                transition={{ duration: 0.45 }}
-                style={{ backgroundColor: "#0D1117", backgroundImage: `linear-gradient(135deg, ${p.color}18 0%, transparent 60%)` }}
+                style={{ background: `radial-gradient(ellipse at 50% 40%, ${p.color}22 0%, #0D1117 65%)` }}
               />
 
               {/* Brand top accent */}
               <div className="absolute top-0 left-0 right-0 h-[3px]" style={{ backgroundColor: p.color }} />
 
-              {/* DEFAULT state — tag + name pinned to bottom */}
+              {/* DEFAULT state — large centred icon + name */}
               <motion.div
-                className="absolute bottom-0 left-0 right-0 p-8 md:p-10"
-                animate={{ opacity: isHovered ? 0 : 1, y: isHovered ? 8 : 0 }}
-                transition={{ duration: 0.3 }}
+                className="absolute inset-0 flex flex-col items-center justify-center gap-8 p-8 md:p-10"
+                animate={{ opacity: isHovered ? 0 : 1, y: isHovered ? -10 : 0 }}
+                transition={{ duration: 0.35 }}
               >
-                <span
-                  className="font-sans text-[10px] tracking-[0.32em] uppercase font-medium block mb-3"
-                  style={{ color: p.color }}
-                >
-                  {p.tag}
-                </span>
-                <h2 className="font-serif text-[clamp(1.7rem,2.4vw,2.8rem)] text-white leading-[1.05] tracking-tight">
-                  {p.name}
-                </h2>
+                {/* Icon */}
+                <img
+                  src={p.icon}
+                  alt=""
+                  aria-hidden="true"
+                  className="w-24 h-24 select-none"
+                  style={{ filter: `brightness(0) invert(1) opacity(0.85)` }}
+                />
+                {/* Name + tag */}
+                <div className="text-center">
+                  <span
+                    className="font-sans text-[10px] tracking-[0.32em] uppercase font-medium block mb-3"
+                    style={{ color: p.color }}
+                  >
+                    {p.tag}
+                  </span>
+                  <h2 className="font-serif text-[clamp(1.5rem,2vw,2.4rem)] text-white leading-[1.1] tracking-tight">
+                    {p.name}
+                  </h2>
+                </div>
               </motion.div>
 
-              {/* HOVER state — description on clean background */}
+              {/* HOVER state — description, no image */}
               <motion.div
                 className="absolute inset-0 flex flex-col justify-center p-8 md:p-10"
                 animate={{ opacity: isHovered ? 1 : 0, y: isHovered ? 0 : 16 }}
-                transition={{ duration: 0.4, delay: isHovered ? 0.1 : 0 }}
+                transition={{ duration: 0.4, delay: isHovered ? 0.08 : 0 }}
               >
                 <span
                   className="font-sans text-[10px] tracking-[0.32em] uppercase font-medium block mb-5"
@@ -125,7 +117,7 @@ function ProgramsSection() {
                 >
                   {p.tag}
                 </span>
-                <h2 className="font-serif text-[clamp(1.7rem,2.4vw,2.8rem)] text-white leading-[1.05] tracking-tight mb-5">
+                <h2 className="font-serif text-[clamp(1.6rem,2.2vw,2.6rem)] text-white leading-[1.05] tracking-tight mb-5">
                   {p.name}
                 </h2>
                 <div className="h-px w-10 mb-6" style={{ backgroundColor: p.color }} />
