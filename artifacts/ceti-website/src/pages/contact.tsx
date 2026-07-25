@@ -4,7 +4,7 @@ export default function Contact() {
   return (
     <div className="w-full min-h-screen bg-ceti-dark text-ceti-cream flex flex-col">
       {/* Spacer for fixed navbar */}
-      <div className="h-16 md:h-20 shrink-0" />
+      <div className="h-20 md:h-24 shrink-0" />
 
       <div className="flex-1 flex flex-col lg:flex-row">
 

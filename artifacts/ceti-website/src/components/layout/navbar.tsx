@@ -31,7 +31,7 @@ export default function Navbar() {
     >
       <div className="flex items-center justify-between px-5 md:px-12">
         {/* Logo clipped to bar height — image overflows, centre (the mark) shows */}
-        <Link href="/" className="z-50 focus:outline-none flex items-center h-16 md:h-20 overflow-hidden shrink-0">
+        <Link href="/" className="z-50 focus:outline-none flex items-center h-20 md:h-24 overflow-hidden shrink-0">
           <LogoWhite />
         </Link>
 
