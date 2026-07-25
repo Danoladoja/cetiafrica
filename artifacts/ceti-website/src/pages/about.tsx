@@ -34,7 +34,7 @@ export default function About() {
       </section>
 
       {/* ── Values strip ── */}
-      <section className="border-t border-white/10">
+      <section>
         <div className="px-8 md:px-14 py-16 md:py-24 max-w-[1400px] mx-auto">
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-10 md:gap-6">
             {[

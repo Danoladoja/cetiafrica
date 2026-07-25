@@ -3,7 +3,7 @@ import cetiColorLogo from "@assets/ChatGPT_Image_Jul_25,_2026,_11_21_07_AM_17849
 
 export default function Footer() {
   return (
-    <footer className="bg-[#0D1117] text-ceti-cream py-10 md:py-14 px-8 md:px-14 mt-auto border-t border-white/8">
+    <footer className="bg-[#0D1117] text-ceti-cream py-10 md:py-14 px-8 md:px-14 mt-auto">
       <div className="flex flex-col md:flex-row justify-between items-center gap-8 md:gap-10">
 
         {/* Logo — top on mobile, right on desktop */}

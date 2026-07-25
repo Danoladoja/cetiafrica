@@ -34,9 +34,9 @@ export default function Programs() {
           initial={{ opacity: 0, y: 32 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 1, ease: [0.16, 1, 0.3, 1] }}
-          className="font-serif text-[clamp(2.8rem,7vw,7rem)] leading-[0.95] tracking-tight text-white"
+          className="font-serif text-[clamp(2rem,4.5vw,4.5rem)] leading-[1.05] tracking-tight text-white"
         >
-          Programs.
+          Integrated programs working across journalism, data, and communications.
         </motion.h1>
 
         <div>
@@ -52,13 +52,21 @@ export default function Programs() {
             transition={{ duration: 0.9, ease: "easeOut", delay: 0.5 }}
             className="font-sans text-base md:text-lg text-white/60 leading-relaxed font-light"
           >
-            Three integrated programs working across journalism, data, and communications — each distinct in method, unified in purpose: building the knowledge infrastructure Africa's energy transition needs.
+            CETI's three programs form a unified ecosystem of knowledge — from the newsroom to the data lab to the communications desk. Each is distinct in method; all are bound by the same purpose: making Africa's energy transition legible, navigable, and actionable.
+          </motion.p>
+          <motion.p
+            initial={{ opacity: 0, y: 16 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.9, ease: "easeOut", delay: 0.65 }}
+            className="font-sans text-base md:text-lg text-white/60 leading-relaxed font-light mt-5"
+          >
+            Africa Energy Pulse brings the journalism. AfriEnergy Tracker maps the investment flows and market shifts in real time. AfriEnergy Comms Lab equips the actors driving change with the language and strategy to lead it.
           </motion.p>
         </div>
       </section>
 
       {/* Program list */}
-      <section className="border-t border-white/10 max-w-[1400px] mx-auto">
+      <section className="max-w-[1400px] mx-auto">
         {programs.map((p, i) => (
           <motion.div
             key={p.num}
@@ -67,7 +75,8 @@ export default function Programs() {
             viewport={{ once: true, margin: "-8%" }}
             transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1], delay: i * 0.07 }}
             className="grid grid-cols-1 md:grid-cols-[96px_1fr_320px] gap-y-4 gap-x-10 lg:gap-x-16 items-start
-                       px-8 md:px-14 py-10 md:py-14 border-b border-white/10 group"
+                       px-8 md:px-14 py-10 md:py-14"
+            style={{ borderTop: `1px solid ${p.color}30` }}
           >
             {/* Number */}
             <span

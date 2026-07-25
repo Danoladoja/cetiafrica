@@ -9,7 +9,7 @@ export default function Contact() {
       <div className="flex-1 flex flex-col lg:flex-row">
 
         {/* Left — heading */}
-        <div className="w-full lg:w-5/12 px-6 md:px-14 py-14 md:py-20 flex flex-col justify-center border-b lg:border-b-0 lg:border-r border-white/10">
+        <div className="w-full lg:w-5/12 px-6 md:px-14 py-14 md:py-20 flex flex-col justify-center">
           <motion.h1
             initial={{ opacity: 0, x: -24 }}
             animate={{ opacity: 1, x: 0 }}

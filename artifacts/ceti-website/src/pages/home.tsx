@@ -104,7 +104,7 @@ export default function Home() {
       </section>
 
       {/* ══ 02 · STATEMENT ══════════════════════════════════════ */}
-      <section className="w-full bg-[#0D1117] border-t border-white/8">
+      <section className="w-full bg-[#0D1117]">
 
         {/* Editorial two-column */}
         <div className="px-8 md:px-14 py-16 md:py-28 grid md:grid-cols-[1fr_2fr] gap-10 md:gap-24 items-start">
@@ -153,7 +153,7 @@ export default function Home() {
               ].map((s, i) => (
                 <div
                   key={i}
-                  className={`flex flex-col gap-2 pt-5 pb-2 ${i > 0 ? "sm:pl-6 sm:border-l border-white/10 border-t sm:border-t-0 mt-0" : ""}`}
+                  className={`flex flex-col gap-2 pt-5 pb-2 ${i > 0 ? "sm:pl-6 mt-0" : ""}`}
                   style={{ borderTop: `2px solid ${s.color}` }}
                 >
                   <span className="font-serif text-[clamp(2rem,4vw,3.5rem)] leading-none" style={{ color: s.color }}>
@@ -188,7 +188,7 @@ export default function Home() {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
-          className="md:hidden flex flex-col border border-white/10 divide-y divide-white/10"
+          className="md:hidden flex flex-col"
         >
           {programs.map((p, i) => {
             const isActive = activeProgram === i;
@@ -262,7 +262,7 @@ export default function Home() {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, margin: "-6%" }}
           transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
-          className="hidden md:flex h-[520px] border border-white/10 overflow-hidden"
+          className="hidden md:flex h-[520px] overflow-hidden"
         >
           {programs.map((p, i) => {
             const isActive = activeProgram === i;
@@ -270,7 +270,7 @@ export default function Home() {
               <motion.div
                 key={p.number}
                 onMouseEnter={() => setActiveProgram(i)}
-                className="relative overflow-hidden cursor-pointer flex-shrink-0 border-r border-white/10 last:border-r-0"
+                className="relative overflow-hidden cursor-pointer flex-shrink-0"
                 animate={{ flexGrow: isActive ? 4 : 1 }}
                 transition={{ duration: 0.55, ease: [0.16, 1, 0.3, 1] }}
                 style={{ borderTop: `3px solid ${p.color}`, minWidth: 72 }}
@@ -353,7 +353,7 @@ export default function Home() {
       </section>
 
       {/* ══ 04 · MARQUEE ════════════════════════════════════════ */}
-      <div className="w-full border-y border-white/10 overflow-hidden py-5 bg-[#0D1117]">
+      <div className="w-full overflow-hidden py-5 bg-[#0D1117]">
         <div className="flex whitespace-nowrap" style={{ animation: "marquee 36s linear infinite" }}>
           {[0, 1].map((n) => (
             <span key={n} className="font-sans text-xs tracking-[0.28em] uppercase text-white/40 px-2 shrink-0">
@@ -375,7 +375,7 @@ export default function Home() {
       </div>
 
       {/* ══ 05 · CTA ════════════════════════════════════════════ */}
-      <section className="w-full bg-[#0C1A30] px-8 md:px-14 py-28 md:py-36 border-t border-white/8">
+      <section className="w-full bg-[#0C1A30] px-8 md:px-14 py-28 md:py-36">
         <div className="max-w-[1400px] mx-auto">
           <motion.span
             initial={{ opacity: 0 }}
