@@ -1,7 +1,4 @@
 import { motion } from "framer-motion";
-import pulseImg from "@assets/generated_images/pulse-img.jpg";
-import commsImg from "@assets/generated_images/comms-img.jpg";
-import heroBg from "@assets/generated_images/hero-bg.jpg";
 
 const programs = [
   {
@@ -10,7 +7,6 @@ const programs = [
     name: "Africa Energy Pulse",
     tag: "Journalism",
     desc: "Pan-African energy journalism tracking the continent's power transition through data-driven reporting, investigative features, and sharp editorial analysis.",
-    img: pulseImg,
   },
   {
     num: "02",
@@ -18,7 +14,6 @@ const programs = [
     name: "AfriEnergy Tracker",
     tag: "Market Intelligence",
     desc: "A real-time intelligence platform mapping Africa's energy investments, project pipelines, and regulatory shifts across 54 countries.",
-    img: heroBg,
   },
   {
     num: "03",
@@ -26,7 +21,6 @@ const programs = [
     name: "AfriEnergy Comms Lab",
     tag: "Strategic Communications",
     desc: "Strategic communications support for clean energy actors — building narratives, strengthening advocacy, and amplifying Africa's transition story.",
-    img: commsImg,
   },
 ];
 
@@ -46,6 +40,24 @@ export default function Programs() {
         </motion.h1>
       </section>
 
+      {/* Subtext */}
+      <section className="px-8 md:px-14 pb-16 md:pb-20 max-w-[1400px] mx-auto">
+        <motion.div
+          initial={{ scaleX: 0 }}
+          animate={{ scaleX: 1 }}
+          transition={{ duration: 0.8, delay: 0.4, ease: [0.16, 1, 0.3, 1] }}
+          className="origin-left h-px bg-ceti-orange w-16 mb-10"
+        />
+        <motion.p
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.9, ease: "easeOut", delay: 0.5 }}
+          className="font-sans text-base md:text-lg text-white/55 leading-relaxed max-w-[60ch] font-light"
+        >
+          Three integrated programs working across journalism, data, and communications — each distinct in method, unified in purpose: building the knowledge infrastructure Africa's energy transition needs.
+        </motion.p>
+      </section>
+
       {/* Program rows */}
       <section className="border-t border-white/10">
         <div className="max-w-[1400px] mx-auto">
@@ -56,7 +68,7 @@ export default function Programs() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true, margin: "-6%" }}
               transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1], delay: i * 0.06 }}
-              className="grid grid-cols-1 lg:grid-cols-[1fr_420px] border-b border-white/10"
+              className="border-b border-white/10"
             >
               {/* Text */}
               <div
@@ -78,15 +90,6 @@ export default function Programs() {
                 </p>
               </div>
 
-              {/* Image */}
-              <div className="hidden lg:block relative overflow-hidden" style={{ borderTop: `2px solid ${p.color}` }}>
-                <img
-                  src={p.img}
-                  alt={p.name}
-                  className="absolute inset-0 w-full h-full object-cover"
-                  style={{ filter: "brightness(0.45) saturate(0.6)" }}
-                />
-              </div>
             </motion.div>
           ))}
         </div>
