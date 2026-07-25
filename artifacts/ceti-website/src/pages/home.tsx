@@ -121,7 +121,7 @@ export default function Home() {
       <section className="w-full bg-[#0D1117] border-t border-white/8">
 
         {/* Editorial two-column */}
-        <div className="px-8 md:px-14 py-20 md:py-28 grid md:grid-cols-[1fr_2fr] gap-12 md:gap-24 items-start">
+        <div className="px-8 md:px-14 py-16 md:py-28 grid md:grid-cols-[1fr_2fr] gap-10 md:gap-24 items-start">
 
           {/* Left — anchor stat */}
           <motion.div
@@ -132,7 +132,7 @@ export default function Home() {
             className="flex flex-col gap-3 md:sticky md:top-32"
           >
             <span className="font-sans text-[10px] tracking-[0.35em] uppercase text-white/45">The Context</span>
-            <span className="font-serif text-[clamp(4rem,10vw,110px)] leading-[0.88] text-ceti-orange select-none tabular-nums">
+            <span className="font-serif text-[clamp(3.5rem,10vw,110px)] leading-[0.88] text-ceti-orange select-none tabular-nums">
               600M
             </span>
             <span className="font-sans text-sm tracking-[0.14em] text-white/60 leading-relaxed max-w-[18ch]">
@@ -141,24 +141,24 @@ export default function Home() {
           </motion.div>
 
           {/* Right — manifesto + data annotations */}
-          <div className="flex flex-col gap-14">
+          <div className="flex flex-col gap-12 md:gap-14">
             <motion.p
               initial={{ opacity: 0, y: 32 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true, margin: "-8%" }}
               transition={{ duration: 1, ease: [0.16, 1, 0.3, 1], delay: 0.1 }}
-              className="font-serif text-[clamp(1.8rem,3vw,3.6rem)] text-white leading-[1.12] tracking-tight"
+              className="font-serif text-[clamp(1.5rem,3vw,3.6rem)] text-white leading-[1.15] tracking-tight"
             >
               Africa holds the world's greatest solar potential and the fastest-growing energy markets on earth. The missing link is knowledge.
             </motion.p>
 
-            {/* Horizontal annotation strip */}
+            {/* Annotation strip — 1 col on tiny screens, 3 on sm+ */}
             <motion.div
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true, margin: "-8%" }}
               transition={{ duration: 0.9, ease: [0.16, 1, 0.3, 1], delay: 0.25 }}
-              className="grid grid-cols-3"
+              className="grid grid-cols-1 sm:grid-cols-3"
             >
               {[
                 { value: "60%", label: "of global solar irradiance",    color: "#2AA89C" },
@@ -167,7 +167,7 @@ export default function Home() {
               ].map((s, i) => (
                 <div
                   key={i}
-                  className={`flex flex-col gap-2 pt-6 pb-2 ${i > 0 ? "pl-6 border-l border-white/10" : ""}`}
+                  className={`flex flex-col gap-2 pt-5 pb-2 ${i > 0 ? "sm:pl-6 sm:border-l border-white/10 border-t sm:border-t-0 mt-0" : ""}`}
                   style={{ borderTop: `2px solid ${s.color}` }}
                 >
                   <span className="font-serif text-[clamp(2rem,4vw,3.5rem)] leading-none" style={{ color: s.color }}>
@@ -185,24 +185,98 @@ export default function Home() {
       </section>
 
       {/* ══ 03 · PROGRAMS ═══════════════════════════════════════ */}
-      <section className="w-full px-8 md:px-14 pt-20 pb-24">
+      <section className="w-full px-8 md:px-14 pt-16 md:pt-20 pb-20 md:pb-24">
         <motion.p
           initial={{ opacity: 0 }}
           whileInView={{ opacity: 1 }}
           viewport={{ once: true }}
           transition={{ duration: 0.6 }}
-          className="font-sans text-[10px] tracking-[0.35em] uppercase text-white/45 mb-14"
+          className="font-sans text-[10px] tracking-[0.35em] uppercase text-white/45 mb-10 md:mb-14"
         >
           Our Programs
         </motion.p>
 
-        {/* Horizontal accordion */}
+        {/* ── Mobile: vertical tap accordion ── */}
+        <motion.div
+          initial={{ opacity: 0, y: 24 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
+          className="md:hidden flex flex-col border border-white/10 divide-y divide-white/10"
+        >
+          {programs.map((p, i) => {
+            const isActive = activeProgram === i;
+            return (
+              <div
+                key={p.number}
+                onClick={() => setActiveProgram(isActive ? -1 : i)}
+                className="relative overflow-hidden cursor-pointer"
+                style={{ borderTop: `3px solid ${p.color}` }}
+              >
+                {/* Brand gradient */}
+                <div
+                  className="absolute inset-0 pointer-events-none transition-opacity duration-400"
+                  style={{
+                    background: `linear-gradient(135deg, ${p.color}1a 0%, transparent 70%)`,
+                    opacity: isActive ? 1 : 0,
+                  }}
+                />
+
+                {/* Header row — always visible */}
+                <div className="flex items-center justify-between px-6 py-5 relative z-10">
+                  <div className="flex items-center gap-4">
+                    <span className="font-sans text-2xl font-bold tabular-nums" style={{ color: p.color }}>
+                      {p.number}
+                    </span>
+                    <div>
+                      <p className="font-serif text-lg text-white leading-tight">{p.name}</p>
+                      <p className="font-sans text-[10px] tracking-[0.2em] uppercase text-white/40 mt-0.5">{p.tag}</p>
+                    </div>
+                  </div>
+                  <span
+                    className="text-white/30 text-xl transition-transform duration-300 shrink-0"
+                    style={{ transform: isActive ? "rotate(45deg)" : "rotate(0deg)" }}
+                  >
+                    +
+                  </span>
+                </div>
+
+                {/* Expandable body */}
+                <AnimatePresence initial={false}>
+                  {isActive && (
+                    <motion.div
+                      initial={{ height: 0, opacity: 0 }}
+                      animate={{ height: "auto", opacity: 1 }}
+                      exit={{ height: 0, opacity: 0 }}
+                      transition={{ duration: 0.35, ease: [0.16, 1, 0.3, 1] }}
+                      className="overflow-hidden"
+                    >
+                      <div className="px-6 pb-7 pt-1 relative z-10">
+                        <p className="font-sans text-sm text-white/55 leading-relaxed mb-6">{p.description}</p>
+                        <Link href={p.href}>
+                          <span
+                            className="inline-block font-sans text-[11px] font-semibold tracking-[0.18em] uppercase px-5 py-2 rounded-full border"
+                            style={{ color: p.color, borderColor: `${p.color}70`, backgroundColor: `${p.color}15` }}
+                          >
+                            Explore Program
+                          </span>
+                        </Link>
+                      </div>
+                    </motion.div>
+                  )}
+                </AnimatePresence>
+              </div>
+            );
+          })}
+        </motion.div>
+
+        {/* ── Desktop: horizontal hover accordion ── */}
         <motion.div
           initial={{ opacity: 0, y: 32 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, margin: "-6%" }}
           transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
-          className="flex h-[520px] border border-white/10 overflow-hidden"
+          className="hidden md:flex h-[520px] border border-white/10 overflow-hidden"
         >
           {programs.map((p, i) => {
             const isActive = activeProgram === i;
@@ -223,13 +297,10 @@ export default function Home() {
                   style={{ background: `linear-gradient(135deg, ${p.color}22 0%, ${p.color}08 45%, transparent 75%)` }}
                 />
 
-                {/* Watermark number — strengthens when active */}
+                {/* Watermark number */}
                 <motion.span
                   className="absolute bottom-6 right-4 font-serif font-extrabold leading-none select-none tabular-nums pointer-events-none"
-                  animate={{
-                    fontSize: isActive ? "10rem" : "4rem",
-                    opacity: isActive ? 0.2 : 0.08,
-                  }}
+                  animate={{ fontSize: isActive ? "10rem" : "4rem", opacity: isActive ? 0.2 : 0.08 }}
                   transition={{ duration: 0.55, ease: [0.16, 1, 0.3, 1] }}
                   style={{ color: p.color }}
                 >
@@ -244,15 +315,11 @@ export default function Home() {
                       animate={{ opacity: 1 }}
                       exit={{ opacity: 0 }}
                       transition={{ duration: 0.2 }}
-                      className="absolute inset-0 flex flex-col items-center justify-center gap-6 px-2"
+                      className="absolute inset-0 flex flex-col items-center justify-center px-2"
                     >
                       <span
                         className="font-sans text-[10px] tracking-[0.25em] uppercase font-medium whitespace-nowrap"
-                        style={{
-                          color: p.color,
-                          writingMode: "vertical-rl",
-                          transform: "rotate(180deg)",
-                        }}
+                        style={{ color: p.color, writingMode: "vertical-rl", transform: "rotate(180deg)" }}
                       >
                         {p.name}
                       </span>
@@ -268,39 +335,23 @@ export default function Home() {
                       animate={{ opacity: 1, y: 0 }}
                       exit={{ opacity: 0, y: 10 }}
                       transition={{ duration: 0.4, ease: "easeOut", delay: 0.12 }}
-                      className="absolute inset-0 flex flex-col justify-end p-10 md:p-12"
+                      className="absolute inset-0 flex flex-col justify-end p-10 lg:p-12"
                     >
-                      {/* Tag */}
-                      <span
-                        className="font-sans text-[10px] tracking-[0.3em] uppercase font-medium mb-4"
-                        style={{ color: p.color }}
-                      >
+                      <span className="font-sans text-[10px] tracking-[0.3em] uppercase font-medium mb-4" style={{ color: p.color }}>
                         {p.tag}
                       </span>
-
-                      {/* Program name */}
-                      <h2 className="font-serif text-[clamp(2rem,3.2vw,3.2rem)] text-white leading-[1.05] tracking-tight mb-5">
+                      <h2 className="font-serif text-[clamp(1.8rem,3.2vw,3.2rem)] text-white leading-[1.05] tracking-tight mb-5">
                         {p.name}
                       </h2>
-
-                      {/* Description */}
                       <p className="font-sans text-sm text-white/55 leading-relaxed mb-8 max-w-sm">
                         {p.description}
                       </p>
-
-                      {/* Divider */}
                       <div className="h-px w-12 mb-8" style={{ backgroundColor: p.color }} />
-
-                      {/* CTA pill */}
                       <div>
                         <Link href={p.href}>
                           <span
                             className="inline-block font-sans text-[11px] font-semibold tracking-[0.18em] uppercase px-5 py-2 rounded-full border transition-colors duration-200"
-                            style={{
-                              color: p.color,
-                              borderColor: `${p.color}70`,
-                              backgroundColor: `${p.color}15`,
-                            }}
+                            style={{ color: p.color, borderColor: `${p.color}70`, backgroundColor: `${p.color}15` }}
                           >
                             Explore Program
                           </span>

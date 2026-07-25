@@ -3,29 +3,29 @@ import cetiColorLogo from "@assets/ChatGPT_Image_Jul_25,_2026,_01_09_19_AM_17849
 
 export default function Footer() {
   return (
-    <footer className="bg-[#0D1117] text-ceti-cream py-14 px-8 md:px-14 mt-auto border-t border-white/8">
-      <div className="flex flex-col md:flex-row justify-between items-center gap-10">
+    <footer className="bg-[#0D1117] text-ceti-cream py-10 md:py-14 px-8 md:px-14 mt-auto border-t border-white/8">
+      <div className="flex flex-col md:flex-row justify-between items-center gap-8 md:gap-10">
+
+        {/* Logo — top on mobile, right on desktop */}
+        <div className="order-first md:order-last opacity-90 hover:opacity-100 transition-opacity">
+          <img
+            src={cetiColorLogo}
+            alt="CETI — Climate and Energy Transition Initiative"
+            className="h-20 md:h-28 w-auto"
+            style={{ mixBlendMode: "screen" }}
+          />
+        </div>
 
         {/* Left column — nav + copyright */}
-        <div className="flex flex-col items-start gap-6">
-          <nav className="flex flex-wrap gap-x-8 gap-y-2 font-sans text-xs tracking-[0.22em] uppercase text-white/40">
+        <div className="flex flex-col items-center md:items-start gap-5 md:gap-6">
+          <nav className="flex flex-wrap justify-center md:justify-start gap-x-8 gap-y-2 font-sans text-xs tracking-[0.22em] uppercase text-white/40">
             <Link href="/about"    className="hover:text-white transition-colors">About</Link>
             <Link href="/programs" className="hover:text-white transition-colors">Programs</Link>
             <Link href="/contact"  className="hover:text-white transition-colors">Contact</Link>
           </nav>
-          <p className="font-sans text-xs text-white/20">
+          <p className="font-sans text-xs text-white/20 text-center md:text-left">
             © {new Date().getFullYear()} Climate and Energy Transition Initiative. All rights reserved.
           </p>
-        </div>
-
-        {/* Right — logo */}
-        <div className="opacity-90 hover:opacity-100 transition-opacity">
-          <img
-            src={cetiColorLogo}
-            alt="CETI — Climate and Energy Transition Initiative"
-            className="h-36 w-auto"
-            style={{ mixBlendMode: "screen" }}
-          />
         </div>
 
       </div>
