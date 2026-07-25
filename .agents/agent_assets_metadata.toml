@@ -1,0 +1,32 @@
+uploads = []
+generated = []
+
+[[outputs]]
+id = "HKHKt_d_N1QB8fv1rpz1v"
+uri = "file://attached_assets/image_search/hero_candidate_1.jpg"
+type = "image"
+title = "1 — Aerial solar farm (geometric panels)"
+
+[[outputs]]
+id = "MXXiJuv8H9rhunTiQ9AiW"
+uri = "file://attached_assets/image_search/hero_candidate_2.jpg"
+type = "image"
+title = "2 — Aerial solar farm (expansive field)"
+
+[[outputs]]
+id = "CdnVsa2XSleKLDYlV9ZX-"
+uri = "file://attached_assets/image_search/hero_candidate_3.jpg"
+type = "image"
+title = "3 — African city skyline (daytime aerial)"
+
+[[outputs]]
+id = "i03z_1mqTrwSI0vcYmI5m"
+uri = "file://attached_assets/image_search/hero_candidate_4.jpg"
+type = "image"
+title = "4 — City skyline (dramatic night lights)"
+
+[[outputs]]
+id = "ekOBhWJUKTznvRd8XU1v1"
+uri = "file://attached_assets/image_search/hero_candidate_5.jpg"
+type = "image"
+title = "5 — African city (bird's-eye view)"
