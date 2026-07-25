@@ -52,7 +52,7 @@ export default function Home() {
             initial={{ opacity: 0, y: 10 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, ease: "easeOut", delay: 0.1 }}
-            className="font-sans text-[10px] tracking-[0.38em] uppercase text-ceti-teal mb-5 block"
+            className="font-sans text-base tracking-[0.06em] uppercase text-white/75 font-light mb-5 block"
           >
             We Are Building
           </motion.span>
