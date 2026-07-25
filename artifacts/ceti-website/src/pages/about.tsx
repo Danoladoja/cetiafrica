@@ -4,39 +4,33 @@ export default function About() {
   return (
     <div className="bg-[#0D1117] min-h-screen w-full text-ceti-cream">
 
-      {/* ── Hero — two-column: heading left, rule + body right ── */}
-      <section className="px-8 md:px-14 pt-36 md:pt-48 pb-16 md:pb-24 max-w-[1400px] mx-auto">
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-20 items-end">
+      {/* ── Hero statement ── */}
+      <section className="px-8 md:px-14 pt-40 md:pt-52 pb-20 md:pb-28 max-w-[1400px] mx-auto">
+        <motion.h1
+          initial={{ opacity: 0, y: 32 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 1, ease: [0.16, 1, 0.3, 1] }}
+          className="font-serif text-[clamp(2.8rem,7vw,7rem)] leading-[0.95] tracking-tight text-white mb-14 max-w-[16ch]"
+        >
+          We are Africa's Knowledge Infrastructure for Energy
+        </motion.h1>
 
-          {/* Left — big heading */}
-          <motion.h1
-            initial={{ opacity: 0, y: 32 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 1, ease: [0.16, 1, 0.3, 1] }}
-            className="font-serif text-[clamp(2.8rem,5.5vw,6rem)] leading-[0.95] tracking-tight text-white"
-          >
-            We are Africa's Knowledge Infrastructure for Energy
-          </motion.h1>
+        {/* Divider */}
+        <motion.div
+          initial={{ scaleX: 0 }}
+          animate={{ scaleX: 1 }}
+          transition={{ duration: 0.8, delay: 0.4, ease: [0.16, 1, 0.3, 1] }}
+          className="origin-left h-px bg-ceti-orange w-16 mb-14"
+        />
 
-          {/* Right — orange rule + body */}
-          <div className="flex flex-col gap-8">
-            <motion.div
-              initial={{ scaleX: 0 }}
-              animate={{ scaleX: 1 }}
-              transition={{ duration: 0.8, delay: 0.4, ease: [0.16, 1, 0.3, 1] }}
-              className="origin-left h-px bg-ceti-orange w-16"
-            />
-            <motion.p
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.9, ease: "easeOut", delay: 0.5 }}
-              className="font-sans text-base md:text-lg text-white/60 leading-relaxed font-light"
-            >
-              The Climate and Energy Transition Initiative (CETI) is Africa's knowledge infrastructure for energy. A pan-African non-profit producing trusted journalism, market intelligence, research, policy analysis, strategic communications, and human-centred storytelling that inform decision-making and strengthen Africa's energy ecosystem. CETI serves as the institutional home of Africa Energy Pulse, AfriEnergy Tracker, and the AfriEnergy Comms Lab, creating an integrated platform for evidence, insight, and public engagement that advances the continent's energy future.
-            </motion.p>
-          </div>
-
-        </div>
+        <motion.p
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.9, ease: "easeOut", delay: 0.5 }}
+          className="font-sans text-base md:text-lg lg:text-xl text-white/65 leading-relaxed max-w-[70ch] font-light"
+        >
+          The Climate and Energy Transition Initiative (CETI) is Africa's knowledge infrastructure for energy. A pan-African non-profit producing trusted journalism, market intelligence, research, policy analysis, strategic communications, and human-centred storytelling that inform decision-making and strengthen Africa's energy ecosystem. CETI serves as the institutional home of Africa Energy Pulse, AfriEnergy Tracker, and the AfriEnergy Comms Lab, creating an integrated platform for evidence, insight, and public engagement that advances the continent's energy future.
+        </motion.p>
       </section>
 
       {/* ── Values strip ── */}
@@ -44,10 +38,10 @@ export default function About() {
         <div className="px-8 md:px-14 py-16 md:py-24 max-w-[1400px] mx-auto">
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-10 md:gap-6">
             {[
-              { num: "01", title: "Evidence-First",  color: "#2AA89C", desc: "Data precedes opinion. We deal in facts, flows, and market realities." },
-              { num: "02", title: "Pan-African",      color: "#E8551A", desc: "A unified perspective across borders. The transition is continental." },
-              { num: "03", title: "Independent",      color: "#F6A820", desc: "Uncompromised analysis. We report without political allegiance." },
-              { num: "04", title: "Action-Oriented",  color: "#2AA89C", desc: "Knowledge designed to trigger decisions, not sit in archives." },
+              { num: "01", title: "Evidence-First",   color: "#2AA89C", desc: "Data precedes opinion. We deal in facts, flows, and market realities." },
+              { num: "02", title: "Pan-African",       color: "#E8551A", desc: "A unified perspective across borders. The transition is continental." },
+              { num: "03", title: "Independent",       color: "#F6A820", desc: "Uncompromised analysis. We report without political allegiance." },
+              { num: "04", title: "Action-Oriented",   color: "#2AA89C", desc: "Knowledge designed to trigger decisions, not sit in archives." },
             ].map((val, i) => (
               <motion.div
                 key={val.num}
