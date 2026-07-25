@@ -1,5 +1,5 @@
 import { Link } from "wouter";
-import { LogoWhite } from "@/components/ui/logo";
+import cetiColorLogo from "@assets/ChatGPT_Image_Jul_25,_2026,_01_09_19_AM_1784938197678.png";
 
 export default function Footer() {
   return (
@@ -7,8 +7,13 @@ export default function Footer() {
       <div className="flex flex-col md:flex-row justify-between items-start md:items-end gap-10">
 
         {/* Logo */}
-        <div className="opacity-80 hover:opacity-100 transition-opacity">
-          <LogoWhite />
+        <div className="opacity-90 hover:opacity-100 transition-opacity">
+          <img
+            src={cetiColorLogo}
+            alt="CETI — Climate and Energy Transition Initiative"
+            className="h-36 w-auto"
+            style={{ mixBlendMode: "screen" }}
+          />
         </div>
 
         {/* Right column */}
