@@ -35,8 +35,8 @@ export default function Home() {
         {/* Parallax image */}
         <motion.div className="absolute inset-0 z-0" style={{ y: heroY }}>
           <img src={heroBg} alt="" className="w-full h-full object-cover scale-110" />
-          <div className="absolute inset-0 bg-[#0D1117]/78" />
-          <div className="absolute inset-x-0 top-0 h-52 bg-gradient-to-b from-[#0D1117]/80 to-transparent" />
+          <div className="absolute inset-0 bg-[#0D1117]/55" />
+          <div className="absolute inset-x-0 top-0 h-52 bg-gradient-to-b from-[#0D1117]/70 to-transparent" />
           <div className="absolute inset-x-0 bottom-0 h-40 bg-gradient-to-t from-[#0D1117] to-transparent" />
         </motion.div>
 
@@ -68,8 +68,8 @@ export default function Home() {
             transition={{ duration: 0.9, ease: "easeOut", delay: 0.75 }}
             className="mt-6 flex items-center gap-4"
           >
-            <span className="block w-8 h-px bg-white/30 shrink-0" />
-            <p className="font-sans text-base md:text-lg text-white/58 font-light tracking-[0.06em]">
+            <span className="block w-8 h-px bg-ceti-orange shrink-0" />
+            <p className="font-sans text-base md:text-lg text-white/75 font-light tracking-[0.06em]">
               For Africa's Energy Transition
             </p>
           </motion.div>
@@ -103,11 +103,11 @@ export default function Home() {
             transition={{ duration: 1, ease: [0.16, 1, 0.3, 1] }}
             className="flex flex-col gap-3 md:sticky md:top-32"
           >
-            <span className="font-sans text-[10px] tracking-[0.35em] uppercase text-white/25">The Context</span>
+            <span className="font-sans text-[10px] tracking-[0.35em] uppercase text-white/45">The Context</span>
             <span className="font-serif text-[clamp(4rem,10vw,110px)] leading-[0.88] text-ceti-orange select-none tabular-nums">
               600M
             </span>
-            <span className="font-sans text-sm tracking-[0.14em] text-white/40 leading-relaxed max-w-[18ch]">
+            <span className="font-sans text-sm tracking-[0.14em] text-white/60 leading-relaxed max-w-[18ch]">
               Africans without reliable electricity — today
             </span>
           </motion.div>
@@ -130,7 +130,7 @@ export default function Home() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true, margin: "-8%" }}
               transition={{ duration: 0.9, ease: [0.16, 1, 0.3, 1], delay: 0.25 }}
-              className="grid grid-cols-3 border-t border-white/10"
+              className="grid grid-cols-3"
             >
               {[
                 { value: "60%", label: "of global solar irradiance",    color: "#2AA89C" },
@@ -140,11 +140,12 @@ export default function Home() {
                 <div
                   key={i}
                   className={`flex flex-col gap-2 pt-6 pb-2 ${i > 0 ? "pl-6 border-l border-white/10" : ""}`}
+                  style={{ borderTop: `2px solid ${s.color}` }}
                 >
                   <span className="font-serif text-[clamp(2rem,4vw,3.5rem)] leading-none" style={{ color: s.color }}>
                     {s.value}
                   </span>
-                  <span className="font-sans text-[11px] tracking-[0.18em] uppercase text-white/35 leading-snug">
+                  <span className="font-sans text-[11px] tracking-[0.18em] uppercase text-white/50 leading-snug">
                     {s.label}
                   </span>
                 </div>
@@ -162,7 +163,7 @@ export default function Home() {
           whileInView={{ opacity: 1 }}
           viewport={{ once: true }}
           transition={{ duration: 0.6 }}
-          className="font-sans text-[10px] tracking-[0.35em] uppercase text-white/25 mb-14"
+          className="font-sans text-[10px] tracking-[0.35em] uppercase text-white/45 mb-14"
         >
           Our Programs
         </motion.p>
@@ -175,13 +176,14 @@ export default function Home() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true, margin: "-8%" }}
               transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1], delay: i * 0.1 }}
+              style={{ borderTop: `3px solid ${p.color}` }}
             >
               <Link
                 href={p.href}
-                className="group flex flex-col gap-8 p-10 md:p-12 h-full transition-colors duration-300 hover:bg-white/[0.03] block"
+                className="group flex flex-col gap-8 p-10 md:p-12 h-full transition-all duration-300 hover:bg-white/[0.05] block"
               >
                 <span
-                  className="font-sans text-[4rem] font-black leading-none tabular-nums opacity-70 transition-opacity duration-300 group-hover:opacity-100"
+                  className="font-sans text-[4rem] font-black leading-none tabular-nums opacity-80 transition-opacity duration-300 group-hover:opacity-100"
                   style={{ color: p.color }}
                 >
                   {p.number}
@@ -189,9 +191,9 @@ export default function Home() {
                 <h2 className="font-serif text-[clamp(1.8rem,2.6vw,3rem)] text-white leading-[1.05] tracking-tight flex-1">
                   {p.name}
                 </h2>
-                <div className="h-px bg-white/10 w-full" />
+                <div className="h-px w-full transition-colors duration-300" style={{ backgroundColor: `${p.color}40` }} />
                 <div className="flex items-center justify-between">
-                  <span className="font-sans text-xs tracking-[0.22em] uppercase text-white/35">{p.tag}</span>
+                  <span className="font-sans text-xs tracking-[0.22em] uppercase text-white/50">{p.tag}</span>
                   <span
                     className="font-sans text-sm font-bold tracking-[0.15em] transition-transform duration-300 group-hover:translate-x-1.5 inline-block"
                     style={{ color: p.color }}
@@ -204,16 +206,22 @@ export default function Home() {
       </section>
 
       {/* ══ 04 · MARQUEE ════════════════════════════════════════ */}
-      <div className="w-full border-y border-white/8 overflow-hidden py-5 bg-[#0D1117]">
+      <div className="w-full border-y border-white/10 overflow-hidden py-5 bg-[#0D1117]">
         <div className="flex whitespace-nowrap" style={{ animation: "marquee 36s linear infinite" }}>
           {[0, 1].map((n) => (
-            <span key={n} className="font-sans text-xs tracking-[0.32em] uppercase text-white/18 px-2 shrink-0">
-              Africa Energy Pulse &nbsp;·&nbsp; AfriEnergy Tracker &nbsp;·&nbsp; AfriEnergy Comms Lab &nbsp;·&nbsp;
-              Knowledge Infrastructure &nbsp;·&nbsp; Africa's Energy Transition &nbsp;·&nbsp;
-              Pan-African &nbsp;·&nbsp; Non-Profit &nbsp;·&nbsp; Open Knowledge &nbsp;·&nbsp;
-              Africa Energy Pulse &nbsp;·&nbsp; AfriEnergy Tracker &nbsp;·&nbsp; AfriEnergy Comms Lab &nbsp;·&nbsp;
-              Knowledge Infrastructure &nbsp;·&nbsp; Africa's Energy Transition &nbsp;·&nbsp;
-              Pan-African &nbsp;·&nbsp; Non-Profit &nbsp;·&nbsp; Open Knowledge &nbsp;·&nbsp;
+            <span key={n} className="font-sans text-xs tracking-[0.28em] uppercase text-white/40 px-2 shrink-0">
+              Africa Energy Pulse
+              <span style={{ color: "#2AA89C" }}>&nbsp; · &nbsp;</span>
+              AfriEnergy Tracker
+              <span style={{ color: "#E8551A" }}>&nbsp; · &nbsp;</span>
+              AfriEnergy Comms Lab
+              <span style={{ color: "#F6A820" }}>&nbsp; · &nbsp;</span>
+              Knowledge Infrastructure
+              <span style={{ color: "#2AA89C" }}>&nbsp; · &nbsp;</span>
+              Africa's Energy Transition
+              <span style={{ color: "#E8551A" }}>&nbsp; · &nbsp;</span>
+              Pan-African &nbsp;·&nbsp; Non-Profit &nbsp;·&nbsp; Open Knowledge
+              <span style={{ color: "#F6A820" }}>&nbsp; · &nbsp;</span>
             </span>
           ))}
         </div>
@@ -227,7 +235,7 @@ export default function Home() {
             whileInView={{ opacity: 1 }}
             viewport={{ once: true }}
             transition={{ duration: 0.6 }}
-            className="font-sans text-[10px] tracking-[0.35em] uppercase text-white/25 block mb-8"
+            className="font-sans text-[10px] tracking-[0.35em] uppercase text-white/45 block mb-8"
           >
             Partner With Us
           </motion.span>
