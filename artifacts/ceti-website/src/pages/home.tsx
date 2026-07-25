@@ -98,7 +98,7 @@ export default function Home() {
           >
             <span className="block w-8 h-px bg-ceti-orange shrink-0" />
             <p className="font-sans text-base md:text-lg text-white/75 font-light tracking-[0.06em]">
-              For Africa's Energy Transition
+              Africa's Energy Future
             </p>
           </motion.div>
         </div>
