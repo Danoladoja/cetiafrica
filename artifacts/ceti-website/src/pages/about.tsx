@@ -5,13 +5,12 @@ export default function About() {
     <div className="bg-[#0D1117] min-h-screen w-full text-ceti-cream">
 
       {/* ── Hero statement ── */}
-      <section className="px-8 md:px-14 pt-40 md:pt-52 pb-20 md:pb-28 max-w-[1400px] mx-auto flex flex-col items-center text-center">
+      <section className="px-8 md:px-14 pt-40 md:pt-52 pb-20 md:pb-28 max-w-[1400px] mx-auto">
         <motion.h1
-          initial={{ opacity: 0, y: 48 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, amount: 0.3 }}
-          transition={{ duration: 1.1, ease: [0.16, 1, 0.3, 1] }}
-          className="font-serif text-[clamp(2.8rem,7vw,7rem)] leading-[0.95] tracking-tight text-white mb-14 max-w-[18ch]"
+          initial={{ opacity: 0, y: 32 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 1, ease: [0.16, 1, 0.3, 1] }}
+          className="font-serif text-[clamp(2.8rem,7vw,7rem)] leading-[0.95] tracking-tight text-white mb-14 max-w-[16ch]"
         >
           We are Africa's Knowledge Infrastructure for Energy
         </motion.h1>
@@ -19,18 +18,16 @@ export default function About() {
         {/* Divider */}
         <motion.div
           initial={{ scaleX: 0 }}
-          whileInView={{ scaleX: 1 }}
-          viewport={{ once: true, amount: 0.5 }}
-          transition={{ duration: 0.8, delay: 0.2, ease: [0.16, 1, 0.3, 1] }}
-          className="origin-center h-px bg-ceti-orange w-16 mb-14"
+          animate={{ scaleX: 1 }}
+          transition={{ duration: 0.8, delay: 0.4, ease: [0.16, 1, 0.3, 1] }}
+          className="origin-left h-px bg-ceti-orange w-16 mb-14"
         />
 
         <motion.p
-          initial={{ opacity: 0, y: 24 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, amount: 0.3 }}
-          transition={{ duration: 0.9, ease: "easeOut", delay: 0.3 }}
-          className="font-sans text-base md:text-lg lg:text-xl text-white/65 leading-relaxed max-w-[60ch] font-light"
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.9, ease: "easeOut", delay: 0.5 }}
+          className="font-sans text-base md:text-lg lg:text-xl text-white/65 leading-relaxed max-w-[70ch] font-light"
         >
           The Climate and Energy Transition Initiative (CETI) is Africa's knowledge infrastructure for energy. A pan-African non-profit producing trusted journalism, market intelligence, research, policy analysis, strategic communications, and human-centred storytelling that inform decision-making and strengthen Africa's energy ecosystem. CETI serves as the institutional home of Africa Energy Pulse, AfriEnergy Tracker, and the AfriEnergy Comms Lab, creating an integrated platform for evidence, insight, and public engagement that advances the continent's energy future.
         </motion.p>
