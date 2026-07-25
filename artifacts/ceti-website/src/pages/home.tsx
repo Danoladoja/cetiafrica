@@ -1,7 +1,11 @@
-import { motion, useScroll, useTransform, AnimatePresence } from "framer-motion";
+import { motion, useScroll, useTransform } from "framer-motion";
 import { Link } from "wouter";
 import { useState } from "react";
 import heroBg from "@assets/generated_images/hero-bg-v5.jpg";
+import pulseImg   from "@assets/programs/program-pulse.jpg";
+import trackerImg from "@assets/programs/program-tracker.jpg";
+import commsImg   from "@assets/programs/program-comms.jpg";
+// images live in attached_assets/programs/ (resolved via @assets alias)
 
 /* ─── Programs data ────────────────────────────────────────── */
 const programs = [
@@ -11,8 +15,8 @@ const programs = [
     tag: "Journalism",
     color: "#2AA89C",
     href: "/programs",
+    image: pulseImg,
     description: "Authoritative journalism covering Africa's energy transition — policy shifts, project finance, grid access, and the communities powering change.",
-    stat: "54", statLabel: "Countries covered",
   },
   {
     number: "02",
@@ -20,8 +24,8 @@ const programs = [
     tag: "Market Intelligence",
     color: "#E8551A",
     href: "/programs",
+    image: trackerImg,
     description: "Real-time data and analysis on Africa's energy markets, investment flows, and project pipelines — turning raw data into strategic insight.",
-    stat: "3×", statLabel: "Power demand by 2040",
   },
   {
     number: "03",
@@ -29,14 +33,14 @@ const programs = [
     tag: "Strategic Communications",
     color: "#F6A820",
     href: "/programs",
+    image: commsImg,
     description: "Building the communications capacity of African energy advocates and institutions to shape their own narrative on the global stage.",
-    stat: "60%", statLabel: "Global solar irradiance",
   },
 ];
 
-/* ─── Programs accordion ────────────────────────────────────── */
+/* ─── Programs cards ────────────────────────────────────────── */
 function ProgramsSection() {
-  const [active, setActive] = useState(0);
+  const [hovered, setHovered] = useState<number | null>(null);
 
   return (
     <section className="w-full px-8 md:px-14 pt-20 pb-24">
@@ -50,118 +54,93 @@ function ProgramsSection() {
         Our Programs
       </motion.p>
 
-      {/* Accordion grid — equal on mobile, flex-grow on desktop */}
-      <div
-        className="flex flex-col md:flex-row border border-white/10 overflow-hidden"
-        style={{ minHeight: 480 }}
-      >
+      <div className="grid grid-cols-1 md:grid-cols-3 border border-white/10 overflow-hidden">
         {programs.map((p, i) => {
-          const isActive = active === i;
+          const isHovered = hovered === i;
           return (
             <motion.div
               key={p.number}
-              className="relative flex flex-col cursor-pointer overflow-hidden border-b md:border-b-0 md:border-r border-white/10 last:border-0"
-              animate={{ flex: isActive ? 2.2 : 1 }}
-              transition={{ duration: 0.55, ease: [0.16, 1, 0.3, 1] }}
-              onMouseEnter={() => setActive(i)}
+              className="relative overflow-hidden cursor-pointer border-b md:border-b-0 md:border-r border-white/10 last:border-0"
+              style={{ height: 520 }}
+              onMouseEnter={() => setHovered(i)}
+              onMouseLeave={() => setHovered(null)}
+              initial={{ opacity: 0, y: 28 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, margin: "-8%" }}
+              transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1], delay: i * 0.1 }}
             >
-              {/* Coloured fill — fades in when active */}
-              <motion.div
-                className="absolute inset-0"
-                animate={{ opacity: isActive ? 1 : 0 }}
-                transition={{ duration: 0.4 }}
-                style={{ background: `linear-gradient(135deg, ${p.color}22 0%, ${p.color}08 100%)` }}
+              {/* Background image — fades out on hover */}
+              <motion.img
+                src={p.image}
+                alt={p.name}
+                className="absolute inset-0 w-full h-full object-cover"
+                animate={{ opacity: isHovered ? 0 : 1, scale: isHovered ? 1.04 : 1 }}
+                transition={{ duration: 0.5, ease: [0.16, 1, 0.3, 1] }}
               />
 
-              {/* Top accent bar */}
-              <div className="h-[3px] w-full shrink-0" style={{ backgroundColor: p.color }} />
+              {/* Base gradient over image — lifts bottom text */}
+              <motion.div
+                className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/30 to-black/10"
+                animate={{ opacity: isHovered ? 0 : 1 }}
+                transition={{ duration: 0.4 }}
+              />
 
-              {/* Large decorative number — watermark behind content */}
-              <div
-                className="absolute right-[-0.5rem] bottom-[-1rem] font-serif leading-none font-extrabold select-none pointer-events-none transition-opacity duration-500"
-                style={{
-                  fontSize: "clamp(7rem, 18vw, 14rem)",
-                  color: `${p.color}${isActive ? "18" : "0a"}`,
-                }}
+              {/* Hover background — solid dark with brand colour tint */}
+              <motion.div
+                className="absolute inset-0"
+                animate={{ opacity: isHovered ? 1 : 0 }}
+                transition={{ duration: 0.45 }}
+                style={{ backgroundColor: "#0D1117", backgroundImage: `linear-gradient(135deg, ${p.color}18 0%, transparent 60%)` }}
+              />
+
+              {/* Brand top accent */}
+              <div className="absolute top-0 left-0 right-0 h-[3px]" style={{ backgroundColor: p.color }} />
+
+              {/* DEFAULT state — tag + name pinned to bottom */}
+              <motion.div
+                className="absolute bottom-0 left-0 right-0 p-8 md:p-10"
+                animate={{ opacity: isHovered ? 0 : 1, y: isHovered ? 8 : 0 }}
+                transition={{ duration: 0.3 }}
               >
-                {p.number}
-              </div>
-
-              {/* Card content */}
-              <div className="relative z-10 flex flex-col h-full p-10 md:p-12">
-
-                {/* Tag — always visible at top */}
                 <span
-                  className="font-sans text-[10px] tracking-[0.32em] uppercase font-medium"
+                  className="font-sans text-[10px] tracking-[0.32em] uppercase font-medium block mb-3"
                   style={{ color: p.color }}
                 >
                   {p.tag}
                 </span>
+                <h2 className="font-serif text-[clamp(1.7rem,2.4vw,2.8rem)] text-white leading-[1.05] tracking-tight">
+                  {p.name}
+                </h2>
+              </motion.div>
 
-                {/* Spacer pushes name to bottom-left of upper area */}
-                <div className="flex-1 flex flex-col justify-end mt-8 gap-4">
-
-                  {/* Stat — visible only when active */}
-                  <AnimatePresence>
-                    {isActive && (
-                      <motion.div
-                        initial={{ opacity: 0, y: 10 }}
-                        animate={{ opacity: 1, y: 0 }}
-                        exit={{ opacity: 0, y: 6 }}
-                        transition={{ duration: 0.35 }}
-                        className="flex flex-col gap-1"
-                      >
-                        <span
-                          className="font-serif text-[clamp(2.4rem,4vw,4.5rem)] leading-none font-extrabold tabular-nums"
-                          style={{ color: p.color }}
-                        >
-                          {p.stat}
-                        </span>
-                        <span className="font-sans text-[11px] tracking-[0.2em] uppercase text-white/45">
-                          {p.statLabel}
-                        </span>
-                      </motion.div>
-                    )}
-                  </AnimatePresence>
-
-                  {/* Program name — always visible */}
-                  <h2
-                    className="font-serif text-white leading-[1.05] tracking-tight transition-all duration-500"
-                    style={{ fontSize: isActive ? "clamp(1.9rem,2.8vw,3.2rem)" : "clamp(1.4rem,2vw,2.2rem)" }}
+              {/* HOVER state — description on clean background */}
+              <motion.div
+                className="absolute inset-0 flex flex-col justify-center p-8 md:p-10"
+                animate={{ opacity: isHovered ? 1 : 0, y: isHovered ? 0 : 16 }}
+                transition={{ duration: 0.4, delay: isHovered ? 0.1 : 0 }}
+              >
+                <span
+                  className="font-sans text-[10px] tracking-[0.32em] uppercase font-medium block mb-5"
+                  style={{ color: p.color }}
+                >
+                  {p.tag}
+                </span>
+                <h2 className="font-serif text-[clamp(1.7rem,2.4vw,2.8rem)] text-white leading-[1.05] tracking-tight mb-5">
+                  {p.name}
+                </h2>
+                <div className="h-px w-10 mb-6" style={{ backgroundColor: p.color }} />
+                <p className="font-sans text-sm text-white/70 leading-relaxed mb-8 max-w-[30ch]">
+                  {p.description}
+                </p>
+                <Link href={p.href}>
+                  <span
+                    className="inline-block font-sans text-[11px] font-semibold tracking-[0.22em] uppercase px-5 py-2 rounded-full border transition-all duration-300 hover:bg-white/10"
+                    style={{ color: p.color, borderColor: `${p.color}80` }}
                   >
-                    {p.name}
-                  </h2>
-                </div>
-
-                {/* Description + CTA — slide in when active */}
-                <AnimatePresence>
-                  {isActive && (
-                    <motion.div
-                      initial={{ opacity: 0, y: 14 }}
-                      animate={{ opacity: 1, y: 0 }}
-                      exit={{ opacity: 0, y: 8 }}
-                      transition={{ duration: 0.4, delay: 0.08 }}
-                      className="mt-6 flex flex-col gap-8"
-                    >
-                      {/* Divider */}
-                      <div className="h-px w-full" style={{ backgroundColor: `${p.color}40` }} />
-
-                      <p className="font-sans text-sm text-white/60 leading-relaxed max-w-[38ch]">
-                        {p.description}
-                      </p>
-
-                      <Link href={p.href}>
-                        <span
-                          className="inline-block font-sans text-[11px] font-semibold tracking-[0.22em] uppercase px-5 py-2 rounded-full border transition-all duration-300 hover:bg-white/10"
-                          style={{ color: p.color, borderColor: `${p.color}70` }}
-                        >
-                          Explore Program
-                        </span>
-                      </Link>
-                    </motion.div>
-                  )}
-                </AnimatePresence>
-              </div>
+                    Explore Program
+                  </span>
+                </Link>
+              </motion.div>
             </motion.div>
           );
         })}
