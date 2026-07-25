@@ -11,7 +11,7 @@ export default function Footer() {
           <img
             src={cetiColorLogo}
             alt="CETI — Climate and Energy Transition Initiative"
-            className="h-20 md:h-28 w-auto"
+            className="h-32 md:h-44 w-auto"
             style={{ mixBlendMode: "screen" }}
           />
         </div>
