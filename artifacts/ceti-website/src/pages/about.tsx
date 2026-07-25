@@ -6,15 +6,6 @@ export default function About() {
 
       {/* ── Hero statement ── */}
       <section className="px-8 md:px-14 pt-40 md:pt-52 pb-20 md:pb-28 max-w-[1400px] mx-auto">
-        <motion.span
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ duration: 0.6 }}
-          className="font-sans text-[10px] tracking-[0.35em] uppercase text-white/45 block mb-10"
-        >
-          About CETI
-        </motion.span>
-
         <motion.h1
           initial={{ opacity: 0, y: 32 }}
           animate={{ opacity: 1, y: 0 }}
@@ -45,16 +36,6 @@ export default function About() {
       {/* ── Values strip ── */}
       <section className="border-t border-white/10">
         <div className="px-8 md:px-14 py-16 md:py-24 max-w-[1400px] mx-auto">
-          <motion.p
-            initial={{ opacity: 0 }}
-            whileInView={{ opacity: 1 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.6 }}
-            className="font-sans text-[10px] tracking-[0.35em] uppercase text-white/45 mb-12"
-          >
-            Our Principles
-          </motion.p>
-
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-10 md:gap-6">
             {[
               { num: "01", title: "Evidence-First",   color: "#2AA89C", desc: "Data precedes opinion. We deal in facts, flows, and market realities." },
