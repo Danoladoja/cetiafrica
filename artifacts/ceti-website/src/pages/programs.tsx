@@ -40,7 +40,8 @@ export default function Programs() {
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 1, ease: [0.16, 1, 0.3, 1] }}
           style={{ color: headingColor }}
-          className="font-serif text-[clamp(2.8rem,7vw,7rem)] leading-[0.95] tracking-tight mb-14 max-w-[16ch]"
+          whileHover={{ color: "#E8551A" }}
+          className="font-serif text-[clamp(2.8rem,7vw,7rem)] leading-[0.95] tracking-tight mb-14 max-w-[16ch] cursor-default"
         >
           Integrated programs across journalism, data, and communications.
         </motion.h1>
