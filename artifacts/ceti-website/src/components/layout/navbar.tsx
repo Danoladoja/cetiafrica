@@ -10,9 +10,7 @@ export default function Navbar() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
   useEffect(() => {
-    const handleScroll = () => {
-      setScrolled(window.scrollY > 50);
-    };
+    const handleScroll = () => setScrolled(window.scrollY > 50);
     window.addEventListener("scroll", handleScroll);
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
@@ -22,26 +20,26 @@ export default function Navbar() {
     { href: "/programs", label: "Programs" },
   ];
 
-  // We only want transparent nav on Home page when not scrolled
   const isHome = location === "/";
   const transparent = isHome && !scrolled && !mobileMenuOpen;
 
   return (
     <header
-      className={`fixed top-0 left-0 right-0 z-50 transition-colors duration-300 ${
+      className={`fixed top-0 left-0 right-0 z-50 transition-colors duration-300 overflow-hidden ${
         transparent ? "bg-transparent text-ceti-cream" : "bg-ceti-dark text-ceti-cream"
       }`}
     >
-      <div className="flex items-center justify-between px-5 md:px-12 py-2 md:py-1">
-        <Link href="/" className="z-50 focus:outline-none">
+      <div className="flex items-center justify-between px-5 md:px-12">
+        {/* Logo clipped to bar height — image overflows, centre (the mark) shows */}
+        <Link href="/" className="z-50 focus:outline-none flex items-center h-16 md:h-20 overflow-hidden shrink-0">
           <LogoWhite />
         </Link>
 
         {/* Desktop Nav */}
         <nav className="hidden md:flex items-center gap-10 font-sans font-medium tracking-wide text-sm uppercase">
           {navLinks.map((link) => (
-            <Link 
-              key={link.href} 
+            <Link
+              key={link.href}
               href={link.href}
               className="relative group py-2"
             >
@@ -49,7 +47,7 @@ export default function Navbar() {
               <span className="absolute left-0 bottom-0 w-0 h-0.5 bg-ceti-orange transition-all duration-300 group-hover:w-full" />
             </Link>
           ))}
-          <Link 
+          <Link
             href="/contact"
             className="text-ceti-teal hover:text-ceti-cream transition-colors duration-300"
           >
@@ -58,7 +56,7 @@ export default function Navbar() {
         </nav>
 
         {/* Mobile Toggle */}
-        <button 
+        <button
           className="md:hidden z-50 p-2"
           onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
         >
@@ -73,12 +71,12 @@ export default function Navbar() {
             initial={{ opacity: 0, y: -20 }}
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: -20 }}
-            className="fixed inset-0 bg-ceti-dark text-ceti-cream z-40 flex flex-col pt-32 px-6 md:hidden"
+            className="fixed inset-0 bg-ceti-dark text-ceti-cream z-40 flex flex-col pt-24 px-6 md:hidden"
           >
             <nav className="flex flex-col gap-8 font-serif text-4xl">
               {navLinks.map((link) => (
-                <Link 
-                  key={link.href} 
+                <Link
+                  key={link.href}
                   href={link.href}
                   onClick={() => setMobileMenuOpen(false)}
                   className="hover:text-ceti-orange transition-colors"
@@ -86,7 +84,7 @@ export default function Navbar() {
                   {link.label}
                 </Link>
               ))}
-              <Link 
+              <Link
                 href="/contact"
                 onClick={() => setMobileMenuOpen(false)}
                 className="text-ceti-teal hover:text-ceti-cream transition-colors mt-8"
