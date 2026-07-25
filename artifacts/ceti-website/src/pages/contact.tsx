@@ -10,14 +10,6 @@ export default function Contact() {
 
         {/* Left — heading */}
         <div className="w-full lg:w-5/12 px-6 md:px-14 py-14 md:py-20 flex flex-col justify-center border-b lg:border-b-0 lg:border-r border-white/10">
-          <motion.span
-            initial={{ opacity: 0, y: 10 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6 }}
-            className="font-sans text-[10px] tracking-[0.35em] uppercase text-white/40 mb-6 block"
-          >
-            Partner with us
-          </motion.span>
           <motion.h1
             initial={{ opacity: 0, x: -24 }}
             animate={{ opacity: 1, x: 0 }}

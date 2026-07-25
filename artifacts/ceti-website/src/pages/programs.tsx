@@ -5,122 +5,93 @@ import heroBg from "@assets/generated_images/hero-bg.jpg";
 
 const programs = [
   {
-    id: "01",
+    num: "01",
+    color: "#2AA89C",
     name: "Africa Energy Pulse",
     tag: "Journalism",
-    color: "#2AA89C",
-    bg: "bg-[#0D2926]",
-    headline: "Trusted journalism on Africa's energy sector.",
-    body: "We track capital flows, policy shifts, and grassroots impacts. Uncovering the stories behind the transition, reporting from the ground up.",
+    desc: "Pan-African energy journalism tracking the continent's power transition through data-driven reporting, investigative features, and sharp editorial analysis.",
     img: pulseImg,
-    imgAlt: "Africa Energy Pulse",
-    imgRight: true,
   },
   {
-    id: "02",
+    num: "02",
+    color: "#E8551A",
     name: "AfriEnergy Tracker",
     tag: "Market Intelligence",
-    color: "#E8551A",
-    bg: "bg-[#1A0D08]",
-    headline: "Market intelligence and data for Africa's energy economy.",
-    body: "Real-time dashboards tracking solar deployment, grid investments, and regulatory shifts across 54 nations. Data made visible.",
+    desc: "A real-time intelligence platform mapping Africa's energy investments, project pipelines, and regulatory shifts across 54 countries.",
     img: heroBg,
-    imgAlt: "AfriEnergy Tracker",
-    imgRight: false,
   },
   {
-    id: "03",
+    num: "03",
+    color: "#F6A820",
     name: "AfriEnergy Comms Lab",
     tag: "Strategic Communications",
-    color: "#F6A820",
-    bg: "bg-[#0D1117]",
-    headline: "Strategic communications for Africa's energy transition.",
-    body: "We equip policymakers and organisations with the narrative tools to drive change — shifting the conversation from deficit to opportunity.",
+    desc: "Strategic communications support for clean energy actors — building narratives, strengthening advocacy, and amplifying Africa's transition story.",
     img: commsImg,
-    imgAlt: "AfriEnergy Comms Lab",
-    imgRight: true,
   },
 ];
 
 export default function Programs() {
   return (
-    <div className="w-full bg-[#0D1117] text-ceti-cream">
-      {/* Spacer for fixed navbar */}
-      <div className="h-16 md:h-20" />
+    <div className="bg-[#0D1117] min-h-screen w-full text-ceti-cream">
 
-      {/* Page header */}
-      <div className="px-6 md:px-14 py-16 md:py-24 border-b border-white/8">
-        <motion.span
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ duration: 0.6 }}
-          className="font-sans text-[10px] tracking-[0.35em] uppercase text-white/40 block mb-5"
-        >
-          What We Do
-        </motion.span>
+      {/* Page header — mirrors About page */}
+      <section className="px-8 md:px-14 pt-40 md:pt-52 pb-16 md:pb-20 max-w-[1400px] mx-auto">
         <motion.h1
-          initial={{ opacity: 0, y: 24 }}
+          initial={{ opacity: 0, y: 32 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.9, ease: [0.16, 1, 0.3, 1] }}
-          className="font-serif text-[clamp(3rem,7vw,96px)] leading-[0.92] tracking-tight"
+          transition={{ duration: 1, ease: [0.16, 1, 0.3, 1] }}
+          className="font-serif text-[clamp(2.8rem,7vw,7rem)] leading-[0.95] tracking-tight text-white"
         >
           Programs.
         </motion.h1>
-      </div>
+      </section>
 
-      {/* Program sections */}
-      {programs.map((p, i) => (
-        <section
-          key={p.id}
-          className={`w-full ${p.bg} border-b border-white/8`}
-        >
-          <div className={`grid grid-cols-1 lg:grid-cols-2 min-h-[60vh]`}>
-
-            {/* Text panel */}
+      {/* Program rows */}
+      <section className="border-t border-white/10">
+        <div className="max-w-[1400px] mx-auto">
+          {programs.map((p, i) => (
             <motion.div
-              initial={{ opacity: 0, y: 32 }}
+              key={p.num}
+              initial={{ opacity: 0, y: 24 }}
               whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true, margin: "-10%" }}
-              transition={{ duration: 0.9, ease: [0.16, 1, 0.3, 1] }}
-              className={`flex flex-col justify-center px-6 md:px-14 py-14 md:py-20 ${p.imgRight ? "lg:order-first" : "lg:order-last"}`}
+              viewport={{ once: true, margin: "-6%" }}
+              transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1], delay: i * 0.06 }}
+              className="grid grid-cols-1 lg:grid-cols-[1fr_420px] border-b border-white/10"
             >
-              <span
-                className="font-sans text-[10px] tracking-[0.35em] uppercase font-semibold mb-5 block"
-                style={{ color: p.color }}
-              >
-                {p.id} · {p.tag}
-              </span>
-              <h2
-                className="font-serif text-[clamp(2rem,4.5vw,56px)] leading-[1.05] tracking-tight mb-6 text-white"
-              >
-                {p.name}
-              </h2>
-              <div className="w-10 h-0.5 mb-8" style={{ backgroundColor: p.color }} />
-              <p className="font-sans text-base md:text-lg text-white/70 font-light leading-relaxed mb-5 max-w-md">
-                {p.headline}
-              </p>
-              <p className="font-sans text-sm text-white/45 leading-relaxed max-w-md">
-                {p.body}
-              </p>
-            </motion.div>
-
-            {/* Image panel */}
-            <div className={`relative h-64 sm:h-80 lg:h-auto ${p.imgRight ? "lg:order-last" : "lg:order-first"}`}>
-              <img
-                src={p.img}
-                alt={p.imgAlt}
-                className="absolute inset-0 w-full h-full object-cover"
-                style={{ filter: "brightness(0.55) saturate(0.7)" }}
-              />
+              {/* Text */}
               <div
-                className="absolute inset-0"
-                style={{ background: `linear-gradient(135deg, ${p.color}22 0%, transparent 60%)` }}
-              />
-            </div>
+                className="px-8 md:px-14 py-12 md:py-16 flex flex-col"
+                style={{ borderTop: `2px solid ${p.color}` }}
+              >
+                <span
+                  className="font-sans text-[10px] tracking-[0.3em] uppercase font-medium mb-5"
+                  style={{ color: p.color }}
+                >
+                  {p.num} · {p.tag}
+                </span>
+                <h2 className="font-serif text-[clamp(1.8rem,3.5vw,3.2rem)] text-white leading-[1.05] tracking-tight mb-6">
+                  {p.name}
+                </h2>
+                <div className="w-10 h-0.5 mb-6" style={{ backgroundColor: p.color }} />
+                <p className="font-sans text-sm md:text-base text-white/55 leading-relaxed font-light max-w-[52ch]">
+                  {p.desc}
+                </p>
+              </div>
 
-          </div>
-        </section>
-      ))}
+              {/* Image */}
+              <div className="hidden lg:block relative overflow-hidden" style={{ borderTop: `2px solid ${p.color}` }}>
+                <img
+                  src={p.img}
+                  alt={p.name}
+                  className="absolute inset-0 w-full h-full object-cover"
+                  style={{ filter: "brightness(0.45) saturate(0.6)" }}
+                />
+              </div>
+            </motion.div>
+          ))}
+        </div>
+      </section>
+
     </div>
   );
 }
