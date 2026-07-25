@@ -1,143 +1,23 @@
 import { motion, useScroll, useTransform } from "framer-motion";
 import { Link } from "wouter";
-import { useState } from "react";
 import heroBg from "@assets/generated_images/hero-bg-v5.jpg";
-import pulseIcon   from "../assets/icons/icon-pulse.svg";
-import trackerIcon from "../assets/icons/icon-tracker.svg";
-import commsIcon   from "../assets/icons/icon-comms.svg";
 
 /* ─── Programs data ────────────────────────────────────────── */
 const programs = [
-  {
-    number: "01",
-    name: "Africa Energy Pulse",
-    tag: "Journalism",
-    color: "#2AA89C",
-    href: "/programs",
-    icon: pulseIcon,
-    description: "Authoritative journalism covering Africa's energy transition — policy shifts, project finance, grid access, and the communities powering change.",
-  },
-  {
-    number: "02",
-    name: "AfriEnergy Tracker",
-    tag: "Market Intelligence",
-    color: "#E8551A",
-    href: "/programs",
-    icon: trackerIcon,
-    description: "Real-time data and analysis on Africa's energy markets, investment flows, and project pipelines — turning raw data into strategic insight.",
-  },
-  {
-    number: "03",
-    name: "AfriEnergy Comms Lab",
-    tag: "Strategic Communications",
-    color: "#F6A820",
-    href: "/programs",
-    icon: commsIcon,
-    description: "Building the communications capacity of African energy advocates and institutions to shape their own narrative on the global stage.",
-  },
+  { number: "01", name: "Africa Energy Pulse",    tag: "Journalism",              color: "#2AA89C", href: "/programs" },
+  { number: "02", name: "AfriEnergy Tracker",     tag: "Market Intelligence",     color: "#E8551A", href: "/programs" },
+  { number: "03", name: "AfriEnergy Comms Lab",   tag: "Strategic Communications",color: "#F6A820", href: "/programs" },
 ];
 
-/* ─── Programs cards ────────────────────────────────────────── */
-function ProgramsSection() {
-  const [hovered, setHovered] = useState<number | null>(null);
-
+/* ─── Inline stat pill ──────────────────────────────────────── */
+function StatPill({ value, label, color }: { value: string; label: string; color: string }) {
   return (
-    <section className="w-full px-8 md:px-14 pt-20 pb-24">
-      <motion.p
-        initial={{ opacity: 0 }}
-        whileInView={{ opacity: 1 }}
-        viewport={{ once: true }}
-        transition={{ duration: 0.6 }}
-        className="font-sans text-[10px] tracking-[0.35em] uppercase text-white/45 mb-14"
-      >
-        Our Programs
-      </motion.p>
-
-      <div className="grid grid-cols-1 md:grid-cols-3 border border-white/10 overflow-hidden">
-        {programs.map((p, i) => {
-          const isHovered = hovered === i;
-          return (
-            <motion.div
-              key={p.number}
-              className="relative overflow-hidden cursor-pointer border-b md:border-b-0 md:border-r border-white/10 last:border-0"
-              style={{ height: 520 }}
-              onMouseEnter={() => setHovered(i)}
-              onMouseLeave={() => setHovered(null)}
-              initial={{ opacity: 0, y: 28 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true, margin: "-8%" }}
-              transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1], delay: i * 0.1 }}
-            >
-              {/* Card background — always dark with brand radial glow */}
-              <div
-                className="absolute inset-0"
-                style={{ background: `radial-gradient(ellipse at 50% 40%, ${p.color}22 0%, #0D1117 65%)` }}
-              />
-
-              {/* Brand top accent */}
-              <div className="absolute top-0 left-0 right-0 h-[3px]" style={{ backgroundColor: p.color }} />
-
-              {/* DEFAULT state — large centred icon + name */}
-              <motion.div
-                className="absolute inset-0 flex flex-col items-center justify-center gap-8 p-8 md:p-10"
-                animate={{ opacity: isHovered ? 0 : 1, y: isHovered ? -10 : 0 }}
-                transition={{ duration: 0.35 }}
-              >
-                {/* Icon */}
-                <img
-                  src={p.icon}
-                  alt=""
-                  aria-hidden="true"
-                  className="w-24 h-24 select-none"
-                  style={{ filter: `brightness(0) invert(1) opacity(0.85)` }}
-                />
-                {/* Name + tag */}
-                <div className="text-center">
-                  <span
-                    className="font-sans text-[10px] tracking-[0.32em] uppercase font-medium block mb-3"
-                    style={{ color: p.color }}
-                  >
-                    {p.tag}
-                  </span>
-                  <h2 className="font-serif text-[clamp(1.5rem,2vw,2.4rem)] text-white leading-[1.1] tracking-tight">
-                    {p.name}
-                  </h2>
-                </div>
-              </motion.div>
-
-              {/* HOVER state — description, no image */}
-              <motion.div
-                className="absolute inset-0 flex flex-col justify-center p-8 md:p-10"
-                animate={{ opacity: isHovered ? 1 : 0, y: isHovered ? 0 : 16 }}
-                transition={{ duration: 0.4, delay: isHovered ? 0.08 : 0 }}
-              >
-                <span
-                  className="font-sans text-[10px] tracking-[0.32em] uppercase font-medium block mb-5"
-                  style={{ color: p.color }}
-                >
-                  {p.tag}
-                </span>
-                <h2 className="font-serif text-[clamp(1.6rem,2.2vw,2.6rem)] text-white leading-[1.05] tracking-tight mb-5">
-                  {p.name}
-                </h2>
-                <div className="h-px w-10 mb-6" style={{ backgroundColor: p.color }} />
-                <p className="font-sans text-sm text-white/70 leading-relaxed mb-8 max-w-[30ch]">
-                  {p.description}
-                </p>
-                <Link href={p.href}>
-                  <span
-                    className="inline-block font-sans text-[11px] font-semibold tracking-[0.22em] uppercase px-5 py-2 rounded-full border transition-all duration-300 hover:bg-white/10"
-                    style={{ color: p.color, borderColor: `${p.color}80` }}
-                  >
-                    Explore Program
-                  </span>
-                </Link>
-              </motion.div>
-            </motion.div>
-          );
-        })}
-      </div>
-    </section>
+    <div className="flex flex-col gap-2">
+      <span className="font-serif text-[clamp(2.4rem,5vw,5rem)] leading-none font-extrabold" style={{ color }}>
+        {value}
+      </span>
+      <span className="font-sans text-sm tracking-[0.2em] uppercase text-white/40">{label}</span>
+    </div>
   );
 }
 
@@ -277,7 +157,62 @@ export default function Home() {
       </section>
 
       {/* ══ 03 · PROGRAMS ═══════════════════════════════════════ */}
-      <ProgramsSection />
+      <section className="w-full px-8 md:px-14 pt-20 pb-24">
+        <motion.p
+          initial={{ opacity: 0 }}
+          whileInView={{ opacity: 1 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.6 }}
+          className="font-sans text-[10px] tracking-[0.35em] uppercase text-white/45 mb-14"
+        >
+          Our Programs
+        </motion.p>
+
+        <div className="grid grid-cols-1 md:grid-cols-3 divide-y md:divide-y-0 md:divide-x divide-white/10 border border-white/10">
+          {programs.map((p, i) => (
+            <motion.div
+              key={p.number}
+              initial={{ opacity: 0, y: 28 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, margin: "-8%" }}
+              transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1], delay: i * 0.1 }}
+              style={{ borderTop: `3px solid ${p.color}` }}
+            >
+              <Link
+                href={p.href}
+                className="group flex flex-col p-10 md:p-12 h-full transition-all duration-300 hover:bg-white/[0.05] block"
+              >
+                {/* Number */}
+                <span
+                  className="font-sans text-[3.5rem] font-black leading-none tabular-nums opacity-80 transition-opacity duration-300 group-hover:opacity-100 mb-6"
+                  style={{ color: p.color }}
+                >
+                  {p.number}
+                </span>
+
+                {/* Name + tag — grouped, grows to fill space */}
+                <div className="flex flex-col gap-3 flex-1 mb-8">
+                  <h2 className="font-serif text-[clamp(1.8rem,2.6vw,3rem)] text-white leading-[1.05] tracking-tight">
+                    {p.name}
+                  </h2>
+                  <span className="font-sans text-xs tracking-[0.22em] uppercase text-white/45">{p.tag}</span>
+                </div>
+
+                {/* Divider */}
+                <div className="h-px w-full mb-6" style={{ backgroundColor: `${p.color}40` }} />
+
+                {/* Explore capsule — full bottom row */}
+                <div>
+                  <span
+                    className="font-sans text-[11px] font-semibold tracking-[0.18em] uppercase px-4 py-1.5 rounded-full border transition-all duration-300 group-hover:text-white"
+                    style={{ color: p.color, borderColor: `${p.color}60`, backgroundColor: `${p.color}12` }}
+                  >Explore</span>
+                </div>
+              </Link>
+            </motion.div>
+          ))}
+        </div>
+      </section>
 
       {/* ══ 04 · MARQUEE ════════════════════════════════════════ */}
       <div className="w-full border-y border-white/10 overflow-hidden py-5 bg-[#0D1117]">
