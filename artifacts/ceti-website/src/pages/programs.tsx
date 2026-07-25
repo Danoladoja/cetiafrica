@@ -28,83 +28,58 @@ export default function Programs() {
   return (
     <div className="bg-[#0D1117] min-h-screen w-full text-ceti-cream">
 
-      {/* Header + subtext */}
-      <section className="px-8 md:px-14 pt-40 md:pt-52 pb-16 md:pb-24 max-w-[1400px] mx-auto grid md:grid-cols-[1fr_1fr] gap-10 md:gap-24 items-end">
+      {/* ── Hero statement ── */}
+      <section className="px-8 md:px-14 pt-40 md:pt-52 pb-20 md:pb-28 max-w-[1400px] mx-auto">
         <motion.h1
           initial={{ opacity: 0, y: 32 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 1, ease: [0.16, 1, 0.3, 1] }}
-          className="font-serif text-[clamp(2rem,4.5vw,4.5rem)] leading-[1.05] tracking-tight text-white"
+          className="font-serif text-[clamp(2.8rem,7vw,7rem)] leading-[0.95] tracking-tight text-white mb-14 max-w-[16ch]"
         >
           Integrated programs working across journalism, data, and communications.
         </motion.h1>
 
-        <div>
-          <motion.div
-            initial={{ scaleX: 0 }}
-            animate={{ scaleX: 1 }}
-            transition={{ duration: 0.8, delay: 0.4, ease: [0.16, 1, 0.3, 1] }}
-            className="origin-left h-px bg-ceti-orange w-12 mb-6"
-          />
-          <motion.p
-            initial={{ opacity: 0, y: 16 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.9, ease: "easeOut", delay: 0.5 }}
-            className="font-sans text-base md:text-lg text-white/60 leading-relaxed font-light"
-          >
-            CETI's three programs form a unified ecosystem of knowledge — from the newsroom to the data lab to the communications desk. Each is distinct in method; all are bound by the same purpose: making Africa's energy transition legible, navigable, and actionable.
-          </motion.p>
-          <motion.p
-            initial={{ opacity: 0, y: 16 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.9, ease: "easeOut", delay: 0.65 }}
-            className="font-sans text-base md:text-lg text-white/60 leading-relaxed font-light mt-5"
-          >
-            Africa Energy Pulse brings the journalism. AfriEnergy Tracker maps the investment flows and market shifts in real time. AfriEnergy Comms Lab equips the actors driving change with the language and strategy to lead it.
-          </motion.p>
-        </div>
+        {/* Divider */}
+        <motion.div
+          initial={{ scaleX: 0 }}
+          animate={{ scaleX: 1 }}
+          transition={{ duration: 0.8, delay: 0.4, ease: [0.16, 1, 0.3, 1] }}
+          className="origin-left h-px bg-ceti-orange w-16 mb-14"
+        />
+
+        <motion.p
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.9, ease: "easeOut", delay: 0.5 }}
+          className="font-sans text-base md:text-lg lg:text-xl text-white/65 leading-relaxed max-w-[70ch] font-light"
+        >
+          CETI's three programs form a unified ecosystem of knowledge — from the newsroom to the data lab to the communications desk. Each is distinct in method; all are bound by the same purpose: making Africa's energy transition legible, navigable, and actionable for the actors who shape it.
+        </motion.p>
       </section>
 
-      {/* Program list */}
-      <section className="max-w-[1400px] mx-auto">
-        {programs.map((p, i) => (
-          <motion.div
-            key={p.num}
-            initial={{ opacity: 0, y: 28 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true, margin: "-8%" }}
-            transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1], delay: i * 0.07 }}
-            className="grid grid-cols-1 md:grid-cols-[96px_1fr_320px] gap-y-4 gap-x-10 lg:gap-x-16 items-start
-                       px-8 md:px-14 py-10 md:py-14"
-            style={{ borderTop: `1px solid ${p.color}30` }}
-          >
-            {/* Number */}
-            <span
-              className="font-serif text-[3.5rem] md:text-[4.5rem] font-bold leading-none tabular-nums select-none"
-              style={{ color: p.color }}
-            >
-              {p.num}
-            </span>
-
-            {/* Name */}
-            <h2 className="font-serif text-[clamp(2rem,4vw,4rem)] text-white font-bold leading-[1.0] tracking-tight self-center">
-              {p.name}
-            </h2>
-
-            {/* Tag + description */}
-            <div className="flex flex-col gap-3 self-center md:pt-1">
-              <span
-                className="font-sans text-[10px] tracking-[0.32em] uppercase font-semibold"
-                style={{ color: p.color }}
+      {/* ── Programs strip ── */}
+      <section>
+        <div className="px-8 md:px-14 py-16 md:py-24 max-w-[1400px] mx-auto">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-10 md:gap-6">
+            {programs.map((p, i) => (
+              <motion.div
+                key={p.num}
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1], delay: i * 0.08 }}
+                className="flex flex-col pt-6"
+                style={{ borderTop: `2px solid ${p.color}` }}
               >
-                {p.tag}
-              </span>
-              <p className="font-sans text-sm text-white/75 leading-relaxed">
-                {p.desc}
-              </p>
-            </div>
-          </motion.div>
-        ))}
+                <span className="font-sans text-[10px] tracking-[0.3em] uppercase font-medium mb-5" style={{ color: p.color }}>
+                  {p.num}
+                </span>
+                <h3 className="font-serif text-2xl md:text-3xl text-white mb-4 leading-tight">{p.name}</h3>
+                <p className="font-sans text-sm text-white/50 leading-relaxed font-light">{p.desc}</p>
+              </motion.div>
+            ))}
+          </div>
+        </div>
       </section>
 
     </div>
