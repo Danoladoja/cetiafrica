@@ -180,20 +180,29 @@ export default function Home() {
             >
               <Link
                 href={p.href}
-                className="group flex flex-col gap-8 p-10 md:p-12 h-full transition-all duration-300 hover:bg-white/[0.05] block"
+                className="group flex flex-col p-10 md:p-12 h-full transition-all duration-300 hover:bg-white/[0.05] block"
               >
+                {/* Number */}
                 <span
-                  className="font-sans text-[4rem] font-black leading-none tabular-nums opacity-80 transition-opacity duration-300 group-hover:opacity-100"
+                  className="font-sans text-[3.5rem] font-black leading-none tabular-nums opacity-80 transition-opacity duration-300 group-hover:opacity-100 mb-6"
                   style={{ color: p.color }}
                 >
                   {p.number}
                 </span>
-                <h2 className="font-serif text-[clamp(1.8rem,2.6vw,3rem)] text-white leading-[1.05] tracking-tight flex-1">
-                  {p.name}
-                </h2>
-                <div className="h-px w-full transition-colors duration-300" style={{ backgroundColor: `${p.color}40` }} />
-                <div className="flex items-center justify-between">
-                  <span className="font-sans text-xs tracking-[0.22em] uppercase text-white/50">{p.tag}</span>
+
+                {/* Name + tag — grouped, grows to fill space */}
+                <div className="flex flex-col gap-3 flex-1 mb-8">
+                  <h2 className="font-serif text-[clamp(1.8rem,2.6vw,3rem)] text-white leading-[1.05] tracking-tight">
+                    {p.name}
+                  </h2>
+                  <span className="font-sans text-xs tracking-[0.22em] uppercase text-white/45">{p.tag}</span>
+                </div>
+
+                {/* Divider */}
+                <div className="h-px w-full mb-6" style={{ backgroundColor: `${p.color}40` }} />
+
+                {/* Explore capsule — full bottom row */}
+                <div>
                   <span
                     className="font-sans text-[11px] font-semibold tracking-[0.18em] uppercase px-4 py-1.5 rounded-full border transition-all duration-300 group-hover:text-white"
                     style={{ color: p.color, borderColor: `${p.color}60`, backgroundColor: `${p.color}12` }}
