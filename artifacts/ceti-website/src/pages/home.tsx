@@ -4,9 +4,30 @@ import heroBg from "@assets/generated_images/hero-bg.jpg";
 
 /* ─── Programs data ────────────────────────────────────────── */
 const programs = [
-  { number: "01", name: "Africa Energy Pulse",    tag: "Journalism",              color: "#2AA89C", href: "/programs" },
-  { number: "02", name: "AfriEnergy Tracker",     tag: "Market Intelligence",     color: "#E8551A", href: "/programs" },
-  { number: "03", name: "AfriEnergy Comms Lab",   tag: "Strategic Communications",color: "#F6A820", href: "/programs" },
+  {
+    number: "01",
+    name: "Africa Energy Pulse",
+    tag: "Journalism",
+    description: "Rigorous, independent reporting on Africa's energy transition — from policy shifts in Abuja to solar cooperatives in rural Mali.",
+    color: "#2AA89C",
+    href: "/programs",
+  },
+  {
+    number: "02",
+    name: "AfriEnergy Tracker",
+    tag: "Market Intelligence",
+    description: "Real-time data and analysis that turns the complexity of 54 energy markets into clear, actionable intelligence for investors and policymakers.",
+    color: "#E8551A",
+    href: "/programs",
+  },
+  {
+    number: "03",
+    name: "AfriEnergy Comms Lab",
+    tag: "Strategic Communications",
+    description: "Equipping African energy voices with the strategy, tools, and platform to shape global narratives on their own terms.",
+    color: "#F6A820",
+    href: "/programs",
+  },
 ];
 
 /* ─── Inline stat pill ──────────────────────────────────────── */
@@ -180,22 +201,31 @@ export default function Home() {
             >
               <Link
                 href={p.href}
-                className="group flex flex-col gap-8 p-10 md:p-12 h-full transition-all duration-300 hover:bg-white/[0.05] block"
+                className="group flex flex-col gap-6 p-10 md:p-12 h-full transition-all duration-300 hover:bg-white/[0.05] block"
               >
+                {/* Tag — colored, leads the card */}
                 <span
-                  className="font-sans text-[4rem] font-black leading-none tabular-nums opacity-80 transition-opacity duration-300 group-hover:opacity-100"
+                  className="font-sans text-[10px] tracking-[0.28em] uppercase font-medium"
                   style={{ color: p.color }}
                 >
-                  {p.number}
+                  {p.tag}
                 </span>
-                <h2 className="font-serif text-[clamp(1.8rem,2.6vw,3rem)] text-white leading-[1.05] tracking-tight flex-1">
+
+                {/* Name */}
+                <h2 className="font-serif text-[clamp(1.6rem,2.2vw,2.6rem)] text-white leading-[1.08] tracking-tight">
                   {p.name}
                 </h2>
-                <div className="h-px w-full transition-colors duration-300" style={{ backgroundColor: `${p.color}40` }} />
-                <div className="flex items-center justify-between">
-                  <span className="font-sans text-xs tracking-[0.22em] uppercase text-white/50">{p.tag}</span>
+
+                {/* Description — the human moment */}
+                <p className="font-sans text-sm text-white/55 leading-relaxed flex-1">
+                  {p.description}
+                </p>
+
+                {/* Footer row — number fades back, arrow steps forward */}
+                <div className="flex items-center justify-between pt-2 border-t border-white/8">
+                  <span className="font-sans text-[11px] tracking-[0.25em] text-white/20">{p.number}</span>
                   <span
-                    className="font-sans text-sm font-bold tracking-[0.15em] transition-transform duration-300 group-hover:translate-x-1.5 inline-block"
+                    className="font-sans text-sm transition-transform duration-300 group-hover:translate-x-1.5 inline-block"
                     style={{ color: p.color }}
                   >→</span>
                 </div>
