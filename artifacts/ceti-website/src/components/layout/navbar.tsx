@@ -31,7 +31,7 @@ export default function Navbar() {
     >
       <div className="flex items-center justify-between px-5 md:px-12">
         {/* Logo clipped to bar height — image overflows, centre (the mark) shows */}
-        <Link href="/" className="z-50 focus:outline-none flex items-center h-20 md:h-24 overflow-hidden shrink-0 -ml-1">
+        <Link href="/" className="z-50 focus:outline-none flex items-center h-20 md:h-24 overflow-hidden shrink-0">
           <LogoWhite />
         </Link>
 
@@ -57,7 +57,7 @@ export default function Navbar() {
 
         {/* Mobile Toggle */}
         <button
-          className="md:hidden z-50 p-2 -mr-1"
+          className="md:hidden z-50 p-2 -mr-2"
           onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
         >
           {mobileMenuOpen ? <X size={24} /> : <Menu size={24} />}
